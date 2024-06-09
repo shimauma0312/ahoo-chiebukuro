@@ -29,16 +29,15 @@ public class AhooController {
     }
 
     @RequestMapping("/form")
-    public String result(@Validated QuestionForm questionForm, BindingResult bindingResult, Model model) {
-
-        if (bindingResult.hasErrors()) {
-            return "form.html";
-        }
-        return "home.html";
+    public String form(QuestionForm questionForm) {
+        return "form.html";
     }
 
     @PostMapping("/insert")
-    public String insert(QuestionForm questionForm, Model model) {
+    public String insert(@Validated QuestionForm questionForm, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            return "form.html";
+        }
         questionService.insert(questionForm);
         return "redirect:/home";
     }
