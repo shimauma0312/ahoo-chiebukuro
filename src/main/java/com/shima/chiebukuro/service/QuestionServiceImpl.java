@@ -16,6 +16,7 @@ public class QuestionServiceImpl implements QuestionService {
     // ShainRepositoryのDI
     public QuestionServiceImpl(QuestionRepository questionRepository) {
         this.questionRepository = questionRepository;
+
     }
 
     @Override
@@ -25,6 +26,8 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public void insert(QuestionForm questionForm) {
+    public void insertQuestion(QuestionForm questionForm) {
+        questionRepository.insertQuestion(questionForm);
+
     }
 }
