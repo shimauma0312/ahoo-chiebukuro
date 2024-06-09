@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.shima.chiebukuro;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

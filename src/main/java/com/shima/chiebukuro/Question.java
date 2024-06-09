@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.shima.chiebukuro;
 
 public class Question {
     private String title;
