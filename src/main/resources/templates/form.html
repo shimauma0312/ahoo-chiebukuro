@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>入力画面</title>
+</head>
+
+<body>
+	<h1>yesDIパターン</h1>
+	<form method="post" action="/insert" th:action="@{output}">
+		<p>社員Noを入れてください(3桁の半角数字)</p>
+		<input type="text" name="title" th:field="${questionForm.title}">
+		<p style="color:red;" th:errors="${questionForm.title}">titleを入れてください </p>
+
+		<input type="text" name="question" th:field="${questionForm.question}">
+		<p style="color:red;" th:errors="${questionForm.question}">内容を入れてください </p>
+		<input type="submit" value="送信">
+	</form>
+</body>
+
+</html>
