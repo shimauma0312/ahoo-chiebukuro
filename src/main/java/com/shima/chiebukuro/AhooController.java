@@ -40,7 +40,7 @@ public class AhooController {
         if (bindingResult.hasErrors()) {
             return "form.html";
         }
-        questionService.insert(questionForm);
+        questionService.insertQuestion(questionForm);
         return "redirect:/home";
     }
 }
