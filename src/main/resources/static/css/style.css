@@ -3,6 +3,11 @@ body {
     background-color: #f4f4f4;
     margin: 0;
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
 }
 
 .ask-button {
@@ -21,6 +26,8 @@ body {
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 500px;
 }
 
 .card h2 {
@@ -30,4 +37,36 @@ body {
 
 .card p {
     color: #333;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form input[type="text"] {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    width: 100%; /* 幅を最大にします */
+    height: 40px; /* 高さを40pxに設定します */
+}
+
+form textarea {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    width: 100%; /* 幅を最大にします */
+    height: 150px; /* 高さを150pxに設定します */
+}
+
+form input[type="submit"] {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
 }
