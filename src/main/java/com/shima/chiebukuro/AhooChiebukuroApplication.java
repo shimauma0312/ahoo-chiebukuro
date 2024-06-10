@@ -3,7 +3,7 @@ package com.shima.chiebukuro;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.shima.chiebukuro.model.SQLiteDBSetup;
+import com.shima.chiebukuro.repository.SQLiteDBSetup;
 
 @SpringBootApplication
 public class AhooChiebukuroApplication {
