@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>AHOO知恵袋</title>
+    <link rel="stylesheet" type="text/css" href="/css/reset.css">
     <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 
@@ -16,6 +17,10 @@
     </div>
     <div th:each="title : ${titles}" class="card">
         <h2 th:text="${title}"></h2>
+        <div id="question-status">
+            <p>役に立った:11</p>
+            <p>2024/3/12 12:33</p>
+        </div>
     </div>
 </body>
 
