@@ -32,7 +32,7 @@ public class AhooController {
 
     @RequestMapping("/content")
     public String content(Model model) {
-        return "content.html";
+        return "question.html";
     }
 
     @RequestMapping("/form")
