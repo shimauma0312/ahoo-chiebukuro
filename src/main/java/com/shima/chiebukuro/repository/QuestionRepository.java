@@ -10,7 +10,4 @@ public interface QuestionRepository {
     void insertQuestion(QuestionForm questionForm);
 
     List<Question> findAll();
-
-    List<String> findTitle();
-
 }

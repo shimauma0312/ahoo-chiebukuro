@@ -22,13 +22,6 @@ public class QuestionRepositoryImpl implements QuestionRepository {
     }
 
     @Override
-    public List<String> findTitle() {
-        List<String> titles = new ArrayList<>();
-        titles = sqLiteDBOperations.selectTitles();
-        return titles;
-    }
-
-    @Override
     public List<Question> findAll() {
         List<Question> questions = new ArrayList<>();
         questions = sqLiteDBOperations.selectQuestions();
