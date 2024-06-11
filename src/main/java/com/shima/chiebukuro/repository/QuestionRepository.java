@@ -11,4 +11,6 @@ public interface QuestionRepository {
 
     List<Question> findAll();
 
+    List<String> findTitle();
+
 }
