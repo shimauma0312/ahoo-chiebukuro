@@ -30,7 +30,7 @@ public class SQLiteDBOperations {
     }
 
     public List<Question> selectQuestions() {
-        String sql = "SELECT title, content FROM questions";
+        String sql = "SELECT title, content, created_at FROM questions";
         List<Question> questions = new ArrayList<>();
 
         try (Connection conn = DriverManager.getConnection("jdbc:sqlite:app.db");
@@ -40,31 +40,13 @@ public class SQLiteDBOperations {
             while (rs.next()) {
                 String title = rs.getString("title");
                 String content = rs.getString("content");
-                questions.add(new Question(title, content));
+                String createdTime = rs.getString("created_at");
+                questions.add(new Question(title, content, createdTime));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
 
         return questions;
-    }
-
-    public List<String> selectTitles() {
-        String sql = "SELECT title FROM questions";
-        List<String> titles = new ArrayList<>();
-
-        try (Connection conn = DriverManager.getConnection("jdbc:sqlite:app.db");
-                Statement stmt = conn.createStatement();
-                ResultSet rs = stmt.executeQuery(sql)) {
-
-            while (rs.next()) {
-                String title = rs.getString("title");
-                titles.add(title);
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-
-        return titles;
     }
 }
