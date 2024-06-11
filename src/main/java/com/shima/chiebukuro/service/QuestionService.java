@@ -9,6 +9,8 @@ public interface QuestionService {
 
     List<Question> findByQuestions();
 
+    List<String> findQuestionTitles();
+
     void insertQuestion(QuestionForm questionForm);
 
 }

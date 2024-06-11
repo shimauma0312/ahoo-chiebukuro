@@ -20,6 +20,11 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
+    public List<String> findQuestionTitles() {
+        return questionRepository.findTitle();
+    }
+
+    @Override
     public List<Question> findByQuestions() {
         // リポジトリから社員を選択
         return questionRepository.findAll();
