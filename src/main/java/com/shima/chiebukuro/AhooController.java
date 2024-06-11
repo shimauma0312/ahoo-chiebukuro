@@ -26,7 +26,7 @@ public class AhooController {
 
     @RequestMapping("/home")
     public String index(QuestionForm questionForm, Model model) {
-        model.addAttribute("titles", questionService.findQuestionTitles());
+        model.addAttribute("titles", questionService.findByQuestions());
         return "home.html";
     }
 
