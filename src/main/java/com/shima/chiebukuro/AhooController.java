@@ -30,6 +30,11 @@ public class AhooController {
         return "home.html";
     }
 
+    @RequestMapping("/content")
+    public String content(Model model) {
+        return "content.html";
+    }
+
     @RequestMapping("/form")
     public String form(QuestionForm questionForm) {
         return "form.html";
