@@ -23,7 +23,7 @@ body {
 .card {
     background-color: white;
     margin: 2px;
-    padding: 5px 20px 5px;
+    padding: 10px 20px 10px;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     width: 80%;
