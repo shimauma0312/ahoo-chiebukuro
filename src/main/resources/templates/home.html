@@ -11,7 +11,7 @@
     <!--質問フォームのボタン-->
     <a class="ask-button" href="/form">質問する</a>
 
-    <div th:if="${#lists.isEmpty(questions)}">
+    <div th:if="${#lists.isEmpty(titles)}">
         何も質問がないようです
     </div>
     <div th:each="title : ${titles}" class="card">
