@@ -14,9 +14,8 @@
     <div th:if="${#lists.isEmpty(questions)}">
         何も質問がないようです
     </div>
-    <div th:each="question : ${questions}" class="card">
-        <h2 th:text="${question.title}"></h2>
-        <p th:text="${question.content}"></p>
+    <div th:each="title : ${titles}" class="card">
+        <h2 th:text="${title}"></h2>
     </div>
 </body>
 
