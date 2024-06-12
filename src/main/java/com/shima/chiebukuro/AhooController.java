@@ -33,7 +33,8 @@ public class AhooController {
     @RequestMapping("/content")
     public String content(Model model) {
         // TODO question.htmlに遷移
-        return "redirect:/home";
+        return "question.html";
+        // return "redirect:/home";
     }
 
     @RequestMapping("/form")
