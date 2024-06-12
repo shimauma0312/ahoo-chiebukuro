@@ -10,6 +10,10 @@ body {
     height: 100vh;
 }
 
+.heading-style {
+    padding: 0.5rem;
+}
+
 .ask-button {
     display: inline-block;
     background-color: #007BFF;
@@ -28,9 +32,10 @@ body {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     width: 80%;
     max-width: 500px;
+    overflow-wrap: break-word;
 }
 
-.card h2 {
+h1 , .card h2 {
     margin-top: 0;
     color: #007BFF;
 }
@@ -75,3 +80,8 @@ form input[type="submit"] {
     border: none;
     cursor: pointer;
 }
+
+#answer > * {
+padding-bottom: 10px;
+}
+
