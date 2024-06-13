@@ -18,7 +18,7 @@ public class QuestionRepositoryImpl implements QuestionRepository {
     }
 
     public void insertQuestion(QuestionForm questionForm) {
-        sqLiteDBOperations.insert(questionForm.getTitle(), questionForm.getQuestion());
+        sqLiteDBOperations.insertQuestion(questionForm.getTitle(), questionForm.getQuestion());
     }
 
     @Override

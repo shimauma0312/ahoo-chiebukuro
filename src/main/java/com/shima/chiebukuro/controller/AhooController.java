@@ -43,12 +43,18 @@ public class AhooController {
         return "form.html";
     }
 
-    @PostMapping("/insert")
+    @PostMapping("/insertQuestion")
     public String insert(@Validated QuestionForm questionForm, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "form.html";
         }
         questionService.insertQuestion(questionForm);
         return "redirect:/home";
+    }
+
+    @RequestMapping("/insertAnswer")
+    public String insertAnswer() {
+        // TODO answer.htmlに遷移
+        return "question.html";
     }
 }

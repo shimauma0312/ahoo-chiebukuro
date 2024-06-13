@@ -16,7 +16,7 @@ import com.shima.chiebukuro.model.Question;
 @Component
 public class SQLiteDBOperations {
 
-    public void insert(String title, String question) {
+    public void insertQuestion(String title, String question) {
         String sql = "INSERT INTO questions(title, content) VALUES(?, ?)";
 
         try (Connection conn = DriverManager.getConnection("jdbc:sqlite:app.db");
