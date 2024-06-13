@@ -21,6 +21,11 @@ public class QuestionRepositoryImpl implements QuestionRepository {
         sqLiteDBOperations.insertQuestion(questionForm.getTitle(), questionForm.getQuestion());
     }
 
+    public Question findByQuestion(String id) {
+        Question questions = sqLiteDBOperations.selectQuestion(id);
+        return questions;
+    }
+
     @Override
     public List<Question> findAll() {
         List<Question> questions = new ArrayList<>();
