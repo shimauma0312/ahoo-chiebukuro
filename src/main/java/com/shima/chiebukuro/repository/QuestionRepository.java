@@ -9,5 +9,7 @@ public interface QuestionRepository {
 
     void insertQuestion(QuestionForm questionForm);
 
+    Question findByQuestion(String id);
+
     List<Question> findAll();
 }
