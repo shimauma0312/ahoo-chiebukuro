@@ -28,6 +28,14 @@
         </button>
     </div>
 
+    <form class="flex-form" method="post" action="/insertAnswer" th:action="@{insertAnswer}">
+        <p>質問に答える</p>
+        <input type="text" name="answer-username">
+
+        <textarea type="text" name="question"></textarea>
+        <input type="submit" value="回答する">
+    </form>
+
 </body>
 
 </html>
