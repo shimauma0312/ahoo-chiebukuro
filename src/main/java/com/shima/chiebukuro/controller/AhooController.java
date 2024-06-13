@@ -1,4 +1,4 @@
-package com.shima.chiebukuro;
+package com.shima.chiebukuro.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,6 +7,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.shima.chiebukuro.model.QuestionForm;
 import com.shima.chiebukuro.service.QuestionService;
 
 @Controller
