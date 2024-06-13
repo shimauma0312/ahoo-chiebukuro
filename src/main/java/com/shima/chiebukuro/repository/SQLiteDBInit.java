@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class SQLiteDBSetup {
+public class SQLiteDBInit {
     public static void setup() {
         // SQLite connection string
         String url = "jdbc:sqlite:app.db";
