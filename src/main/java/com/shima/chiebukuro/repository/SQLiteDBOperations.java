@@ -30,7 +30,7 @@ public class SQLiteDBOperations {
     }
 
     public List<Question> selectQuestions() {
-        String sql = "SELECT title, content, created_at FROM questions";
+        String sql = "SELECT id, title, content, created_at FROM questions";
         List<Question> questions = new ArrayList<>();
 
         try (Connection conn = DriverManager.getConnection("jdbc:sqlite:app.db");
@@ -38,10 +38,34 @@ public class SQLiteDBOperations {
                 ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
+                int id = rs.getInt("id");
                 String title = rs.getString("title");
                 String content = rs.getString("content");
                 String createdTime = rs.getString("created_at");
-                questions.add(new Question(title, content, createdTime));
+                questions.add(new Question(id, title, content, createdTime));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return questions;
+    }
+
+    public Question selectQuestion(String queryid) {
+        String sql = "SELECT id, title, content, created_at FROM questions WHERE id = ?";
+        Question questions = null;
+
+        try (Connection conn = DriverManager.getConnection("jdbc:sqlite:app.db");
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, queryid);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String title = rs.getString("title");
+                String content = rs.getString("content");
+                String createdTime = rs.getString("created_at");
+                questions = new Question(id, title, content, createdTime);
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
