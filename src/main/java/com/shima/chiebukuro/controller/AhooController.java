@@ -4,6 +4,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -31,11 +33,10 @@ public class AhooController {
         return "home.html";
     }
 
-    @RequestMapping("/content")
-    public String content(Model model) {
-        // TODO question.htmlに遷移
+    @GetMapping("/question/{id}")
+    public String getQuestion(@PathVariable("id") String id, Model model) {
+        model.addAttribute("question", questionService.findByQuestion(id));
         return "question.html";
-        // return "redirect:/home";
     }
 
     @RequestMapping("/form")
