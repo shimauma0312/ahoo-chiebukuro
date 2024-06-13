@@ -1,4 +1,4 @@
-package com.shima.chiebukuro;
+package com.shima.chiebukuro.model;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
