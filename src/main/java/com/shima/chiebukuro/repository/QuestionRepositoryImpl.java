@@ -5,8 +5,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.shima.chiebukuro.QuestionForm;
 import com.shima.chiebukuro.model.Question;
+import com.shima.chiebukuro.model.QuestionForm;
 
 @Repository
 public class QuestionRepositoryImpl implements QuestionRepository {
