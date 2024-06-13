@@ -10,23 +10,33 @@
 
 <body>
     <h1 class="heading-style">質問</h1>
-
     <div class="card">
-        <h2>title</h2>
-        <p>「ではみなさんは、そういうふうに川だと言われたり、乳の流れたあとだと言われたりしていた、このぼんやりと白いものがほんとうは何かご承知ですか」先生は、黒板につるした大きな黒い星座の図の、上から下へ白くけぶった銀河帯のようなところを指しながら、みんなに問いをかけました。カムパネルラが手をあげました。それから四、五人手をあげました。ジョバンニも手をあげようとして、急いでそのままやめました。
-        </p>
+        <h2 th:text="${question.title}"></h2>
+        <p th:text="${question.content}"></p>
     </div>
 
     <h1 class="heading-style">回答</h1>
 
-    <div class="card gap" id="answer">
-        <h2>hogeさん</h2>
-        <p>「ではみなさんは、そういうふうに川だと言われたり、乳の流れたあとだと言われたりしていた、このぼんやりと白いものがほんとうは何かご承知ですか」先生は、黒板につるした大きな黒い星座の図の、上から下へ白くけぶった銀河帯のようなところを指しながら、みんなに問いをかけました。カムパネルラが手をあげました。それから四、五人手をあげました。ジョバンニも手をあげようとして、急いでそのままやめました。
-        </p>
+    <div th:if="${#lists.isEmpty(answers)}">
+        まだ回答がないようです
+    </div>
+
+    <div th:each="answer : ${answers}" class="card gap" id="answer">
+        <h2 th:text="$answer.name"></h2>
+        <p th:text="$answer.answer"></p>
         <button id="star-btn">
             役に立った
         </button>
     </div>
+
+
+    <a th:each="title : ${titles}" class="card" th:href="@{/question/{id}(id=${title.id})}">
+        <h2 th:text="${title.title}"></h2>
+        <div id="question-status">
+            <p>共感:11</p>
+            <p th:text="${title.createdTime}"></p>
+        </div>
+    </a>
 
     <form class="flex-form" method="post" action="/insertAnswer" th:action="@{insertAnswer}">
         <p>質問に答える</p>

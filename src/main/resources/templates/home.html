@@ -15,7 +15,7 @@
     <div th:if="${#lists.isEmpty(titles)}">
         何も質問がないようです
     </div>
-    <a th:each="title : ${titles}" class="card" href="/content">
+    <a th:each="title : ${titles}" class="card" th:href="@{/question/{id}(id=${title.id})}">
         <h2 th:text="${title.title}"></h2>
         <div id="question-status">
             <p>共感:11</p>
