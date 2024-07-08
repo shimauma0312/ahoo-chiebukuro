@@ -39,6 +39,7 @@
     </a>
 
     <form class="flex-form" method="post" action="/insertAnswer" th:action="@{insertAnswer}">
+        <input type="hidden" name="questionId" th:value="${question.id}">
         <p>質問に答える</p>
         <input type="text" name="answer-username">
 
