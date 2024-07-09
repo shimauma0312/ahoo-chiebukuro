@@ -35,7 +35,7 @@ public class AhooController {
 
     @GetMapping("/question/{id}")
     public String getQuestion(@PathVariable("id") String id, Model model) {
-        model.addAttribute("question", questionService.findByQuestion(id));
+        model.addAttribute("question", questionService.findByQuestionContent(id));
         return "question.html";
     }
 
