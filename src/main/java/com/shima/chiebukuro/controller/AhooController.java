@@ -4,11 +4,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.shima.chiebukuro.model.AnswerForm;
 import com.shima.chiebukuro.model.QuestionForm;
 import com.shima.chiebukuro.service.QuestionService;
 
@@ -33,8 +33,8 @@ public class AhooController {
         return "home.html";
     }
 
-    @GetMapping("/question/{id}")
-    public String getQuestion(@PathVariable("id") String id, Model model) {
+    @RequestMapping("/question/{id}")
+    public String getQuestion(AnswerForm answerForm, @PathVariable("id") String id, Model model) {
         model.addAttribute("question", questionService.findByQuestionContent(id));
         return "question.html";
     }
@@ -53,9 +53,9 @@ public class AhooController {
         return "redirect:/home";
     }
 
-    @RequestMapping("/insertAnswer")
-    public String insertAnswer() {
-        // TODO answer.htmlに遷移
-        return "question.html";
+    @PostMapping("/insertAnswer")
+    public String insertAnswer(@Validated AnswerForm answerForm, BindingResult bindingResult, Model model) {
+        String redirectPath = String.format("redirect:/question/%s", answerForm.getQuestionId());
+        return redirectPath;
     }
 }

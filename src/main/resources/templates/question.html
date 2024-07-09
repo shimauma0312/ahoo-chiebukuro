@@ -39,11 +39,12 @@
     </a>
 
     <form class="flex-form" method="post" action="/insertAnswer" th:action="@{insertAnswer}">
-        <input type="hidden" name="questionId" th:value="${question.id}">
+        <input type="hidden" name="questionId" th:value="${answerForm.questionId}">
         <p>質問に答える</p>
-        <input type="text" name="answer-username">
+        <input type="text" name="respondent" th:value="${answerForm.respondent}">
 
-        <textarea type="text" name="question"></textarea>
+        <textarea name="answer" th:value="${answerForm.answer}"></textarea>
+        <p style="color:red;" th:errors="${answerForm.answer}">回答を入れてください </p>
         <input type="submit" value="回答する">
     </form>
 
