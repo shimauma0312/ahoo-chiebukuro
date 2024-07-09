@@ -25,8 +25,8 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public Question findByQuestion(String id) {
-        return questionRepository.findByQuestion(id);
+    public Question findByQuestionContent(String id) {
+        return questionRepository.findByQuestionContent(id);
     }
 
     @Override

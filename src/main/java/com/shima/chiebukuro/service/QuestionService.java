@@ -9,7 +9,7 @@ public interface QuestionService {
 
     List<Question> findByQuestions();
 
-    Question findByQuestion(String id);
+    Question findByQuestionContent(String id);
 
     void insertQuestion(QuestionForm questionForm);
 
