@@ -10,15 +10,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.shima.chiebukuro.model.AnswerForm;
 import com.shima.chiebukuro.model.QuestionForm;
+import com.shima.chiebukuro.service.AnswerService;
 import com.shima.chiebukuro.service.QuestionService;
 
 @Controller
 public class AhooController {
 
     private final QuestionService questionService;
+    private final AnswerService answerService;
 
-    public AhooController(QuestionService questionService) {
+    public AhooController(QuestionService questionService, AnswerService answerService) {
         this.questionService = questionService;
+        this.answerService = answerService;
     }
 
     // redirect処理
@@ -55,6 +58,10 @@ public class AhooController {
 
     @PostMapping("/question/insertAnswer")
     public String insertAnswer(@Validated AnswerForm answerForm, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            return "question.html";
+        }
+        answerService.insertAnswer(answerForm);
         String redirectPath = String.format("redirect:/question/%s", answerForm.getQuestionId());
         return redirectPath;
     }

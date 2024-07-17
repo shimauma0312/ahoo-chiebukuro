@@ -1,22 +1,16 @@
 package com.shima.chiebukuro.model;
 
 public class Answer {
-    private String id;
     private String questionId;
     private String answer;
     private String name;
     private String date;
 
-    public Answer(String id, String questionId, String answer, String name, String date) {
-        this.id = id;
+    public Answer(String questionId, String answer, String name, String date) {
         this.questionId = questionId;
         this.answer = answer;
         this.name = name;
         this.date = date;
-    }
-
-    public String getId() {
-        return id;
     }
 
     public String getQuestionId() {

@@ -11,6 +11,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+import com.shima.chiebukuro.model.Answer;
 import com.shima.chiebukuro.model.Question;
 
 @Component
@@ -72,5 +73,43 @@ public class SQLiteDBOperations {
         }
 
         return questions;
+    }
+
+    public void insertAnswer(String questionIdStr, String respondent, String answer) {
+        int questionId = Integer.parseInt(questionIdStr);
+        String sql = "INSERT INTO answers(question_id, responder_name, answer) VALUES(?, ?, ?)";
+
+        try (Connection conn = DriverManager.getConnection("jdbc:sqlite:app.db");
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, questionId);
+            pstmt.setString(2, answer);
+            pstmt.setString(3, respondent);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public List<Answer> selectAnswer(String questionId) {
+        String sql = "SELECT question_id, respondent, answer, created_at FROM answers WHERE question_id = ?";
+        List<Answer> answers = new ArrayList<>();
+
+        try (Connection conn = DriverManager.getConnection("jdbc:sqlite:app.db");
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, questionId);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                String questionIdValue = String.valueOf(rs.getInt("question_id"));
+                String respondent = rs.getString("respondent");
+                String answer = rs.getString("answer");
+                String createdTime = rs.getString("created_at");
+                answers.add(new Answer(questionIdValue, answer, respondent, createdTime));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return answers;
     }
 }
