@@ -53,7 +53,7 @@ public class AhooController {
         return "redirect:/home";
     }
 
-    @PostMapping("/insertAnswer")
+    @PostMapping("/question/insertAnswer")
     public String insertAnswer(@Validated AnswerForm answerForm, BindingResult bindingResult, Model model) {
         String redirectPath = String.format("redirect:/question/%s", answerForm.getQuestionId());
         return redirectPath;
