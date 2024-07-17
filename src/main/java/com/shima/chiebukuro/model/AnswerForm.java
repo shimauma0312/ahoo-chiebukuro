@@ -11,7 +11,7 @@ public class AnswerForm {
     @Pattern(regexp = ".{1,255}", message = "回答内容は255文字以内で入力してください")
     private String answer;
 
-    private int questionId;
+    private String questionId;
 
     public String getRespondent() {
         return respondent;
@@ -29,11 +29,11 @@ public class AnswerForm {
         this.answer = answer;
     }
 
-    public int getQuestionId() {
+    public String getQuestionId() {
         return questionId;
     }
 
-    public void setQuestionId(int questionId) {
+    public void setQuestionId(String questionId) {
         this.questionId = questionId;
     }
 
