@@ -91,17 +91,17 @@ public class SQLiteDBOperations {
     }
 
     public List<Answer> selectAnswer(String questionId) {
-        String sql = "SELECT question_id, respondent, answer, created_at FROM answers WHERE question_id = ?";
+        String sql = "SELECT question_id, responder_name, answer, created_at FROM answers WHERE question_id = ?";
         List<Answer> answers = new ArrayList<>();
 
         try (Connection conn = DriverManager.getConnection("jdbc:sqlite:app.db");
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, questionId);
+            pstmt.setInt(1, Integer.parseInt(questionId));
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
                 String questionIdValue = String.valueOf(rs.getInt("question_id"));
-                String respondent = rs.getString("respondent");
+                String respondent = rs.getString("responder_name");
                 String answer = rs.getString("answer");
                 String createdTime = rs.getString("created_at");
                 answers.add(new Answer(questionIdValue, answer, respondent, createdTime));

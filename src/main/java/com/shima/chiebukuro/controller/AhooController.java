@@ -39,6 +39,7 @@ public class AhooController {
     @RequestMapping("/question/{id}")
     public String getQuestion(AnswerForm answerForm, @PathVariable("id") String id, Model model) {
         model.addAttribute("question", questionService.findByQuestionContent(id));
+        model.addAttribute("answers", answerService.findByAnswerContent(id));
         return "question.html";
     }
 

@@ -24,6 +24,7 @@
     <div th:each="answer : ${answers}" class="card gap" id="answer">
         <h2 th:text="${answer.name}"></h2>
         <p th:text="${answer.answer}"></p>
+        <p th:text="${answer.date}"></p>
         <button id="star-btn">
             役に立った
         </button>

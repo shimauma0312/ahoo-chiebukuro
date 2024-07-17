@@ -20,7 +20,7 @@ public class AnswerRepositoryImpl implements AnswerRepository {
     }
 
     public List<Answer> findByAnswerContent(String id) {
-        List<Answer> answer = sqLiteDBOperations.selectAnswer(id);
-        return answer;
+        List<Answer> answers = sqLiteDBOperations.selectAnswer(id);
+        return answers;
     }
 }
