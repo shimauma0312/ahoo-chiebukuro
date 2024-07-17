@@ -17,6 +17,16 @@
 
     <h1 class="heading-style">回答</h1>
 
+    <form class="flex-form" method="post" action="/insertAnswer" th:action="@{insertAnswer}">
+        <input type="hidden" name="questionId" th:value="${question.id}">
+        <p>質問に答える</p>
+        <input type="text" name="respondent" th:field=="${answerForm.respondent}">
+
+        <textarea name="answer" th:field=="${answerForm.answer}"></textarea>
+        <p style="color:red;" th:errors="${answerForm.answer}">回答を入れてください </p>
+        <input type="submit" value="回答する">
+    </form>
+
     <div th:if="${#lists.isEmpty(answers)}">
         まだ回答がないようです
     </div>
@@ -29,16 +39,6 @@
             役に立った
         </button>
     </div>
-
-    <form class="flex-form" method="post" action="/insertAnswer" th:action="@{insertAnswer}">
-        <input type="hidden" name="questionId" th:value="${question.id}">
-        <p>質問に答える</p>
-        <input type="text" name="respondent" th:field=="${answerForm.respondent}">
-
-        <textarea name="answer" th:field=="${answerForm.answer}"></textarea>
-        <p style="color:red;" th:errors="${answerForm.answer}">回答を入れてください </p>
-        <input type="submit" value="回答する">
-    </form>
 
 </body>
 
