@@ -15,12 +15,12 @@
         <p th:text="${question.content}"></p>
     </div>
 
+    <!--回答フォーム-->
     <h1 class="heading-style">回答</h1>
-
     <form class="flex-form" method="post" action="/insertAnswer" th:action="@{insertAnswer}">
         <input type="hidden" name="questionId" th:value="${question.id}">
         <p>質問に答える</p>
-        <input type="text" name="respondent" th:field=="${answerForm.respondent}">
+        <input type="text" name="respondent" th:field=="${answerForm.responderName}">
 
         <textarea name="answer" th:field=="${answerForm.answer}"></textarea>
         <p style="color:red;" th:errors="${answerForm.answer}">回答を入れてください </p>
