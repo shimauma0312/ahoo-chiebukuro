@@ -16,7 +16,7 @@ public class AnswerRepositoryImpl implements AnswerRepository {
     }
 
     public void insertAnswer(AnswerForm answerForm) {
-        sqLiteDBOperations.insertAnswer(answerForm.getQuestionId(), answerForm.getRespondent(), answerForm.getAnswer());
+        sqLiteDBOperations.insertAnswer(answerForm.getQuestionId(), answerForm.getResponderName(), answerForm.getAnswer());
     }
 
     public List<Answer> findByAnswerContent(String id) {
