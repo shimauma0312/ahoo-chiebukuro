@@ -5,7 +5,7 @@ import jakarta.validation.constraints.Pattern;
 
 public class AnswerForm {
 
-    private String respondent;
+    private String responderName;
 
     @NotEmpty(message = "回答を入力してください")
     @Pattern(regexp = ".{1,255}", message = "回答内容は255文字以内で入力してください")
@@ -14,11 +14,11 @@ public class AnswerForm {
     private String questionId;
 
     public String getRespondent() {
-        return respondent;
+        return responderName;
     }
 
     public void setRespondent(String respondent) {
-        this.respondent = respondent;
+        this.responderName = respondent;
     }
 
     public String getAnswer() {
