@@ -82,8 +82,8 @@ public class SQLiteDBOperations {
         try (Connection conn = DriverManager.getConnection("jdbc:sqlite:app.db");
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, questionId);
-            pstmt.setString(2, answer);
-            pstmt.setString(3, respondent);
+            pstmt.setString(2, respondent);
+            pstmt.setString(3, answer);
             pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
