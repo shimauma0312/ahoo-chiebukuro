@@ -52,6 +52,8 @@ h1 , .card h2 {
 form {
     display: flex;
     flex-direction: column;
+    width: 80%;
+    max-width: 500px;
 }
 
 form input[type="text"] {
