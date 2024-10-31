@@ -9,18 +9,22 @@
 </head>
 
 <body>
+    <div>
+        <a href="/home" id="home-link">Home</a>
+    </div>
+
     <h1 class="heading-style">質問</h1>
     <div class="card">
         <h2 th:text="${question.title}"></h2>
         <p th:text="${question.content}"></p>
     </div>
 
+    <!--回答フォーム-->
     <h1 class="heading-style">回答</h1>
-
     <form class="flex-form" method="post" action="/insertAnswer" th:action="@{insertAnswer}">
         <input type="hidden" name="questionId" th:value="${question.id}">
         <p>質問に答える</p>
-        <input type="text" name="respondent" th:field=="${answerForm.respondent}">
+        <input type="text" name="respondent" th:field=="${answerForm.responderName}">
 
         <textarea name="answer" th:field=="${answerForm.answer}"></textarea>
         <p style="color:red;" th:errors="${answerForm.answer}">回答を入れてください </p>
