@@ -6,6 +6,7 @@
     <title>AHOO知恵袋</title>
     <link rel="stylesheet" type="text/css" href="/css/reset.css">
     <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
@@ -22,11 +23,44 @@
         <a th:each="title : ${titles}" class="card" th:href="@{/question/{id}(id=${title.id})}">
             <h2 th:text="${title.title}"></h2>
             <div id="question-status">
-                <p>共感:11</p>
+                <div class="empathy-container">                    <span class="empathy-count" th:text="'共感:' + ${title.empathyCount}"></span>
+                    <button class="question-empathy-btn" th:data-id="${title.id}" onclick="incrementEmpathy(event, this)">
+                        共感
+                    </button>
+                </div>
                 <p th:text="${title.createdTime}"></p>
             </div>
         </a>
     </div>
+
+    <script>
+        function incrementEmpathy(event, button) {
+            // リンククリックイベントをキャンセル（質問詳細ページへの遷移を防止）
+            event.preventDefault();
+            event.stopPropagation();
+            
+            const questionId = button.getAttribute('data-id');
+            const btn = $(button);
+            
+            $.ajax({
+                url: '/question/empathy/' + questionId,
+                type: 'POST',
+                success: function(result) {
+                    // ボタンを押した後の処理
+                    const countElement = btn.siblings('.empathy-count');
+                    const currentText = countElement.text();
+                    const currentCount = parseInt(currentText.replace('共感:', ''));
+                    countElement.text('共感:' + (currentCount + 1));
+                    
+                    // ボタンを一時的に無効化（連打防止）
+                    btn.prop('disabled', true);
+                    setTimeout(function() {
+                        btn.prop('disabled', false);
+                    }, 1000);
+                }
+            });
+        }
+    </script>
 </body>
 
 </html>
