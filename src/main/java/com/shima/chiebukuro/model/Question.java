@@ -5,12 +5,14 @@ public class Question {
     private String title;
     private String content;
     private String createdTime;
+    private int empathyCount;
 
-    public Question(int id, String title, String content, String createdTime) {
+    public Question(int id, String title, String content, String createdTime, int empathyCount) {
         this.id = id;
         this.title = title;
         this.content = content;
         this.createdTime = createdTime;
+        this.empathyCount = empathyCount;
     }
 
     public int getId() {
@@ -28,6 +30,10 @@ public class Question {
     public String getCreatedTime() {
         return createdTime;
     }
+    
+    public int getEmpathyCount() {
+        return empathyCount;
+    }
 
     public void setId(int id) {
         this.id = id;
@@ -44,5 +50,8 @@ public class Question {
     public void setCreatedTime(String createdTime) {
         this.createdTime = createdTime;
     }
-
+    
+    public void setEmpathyCount(int empathyCount) {
+        this.empathyCount = empathyCount;
+    }
 }
