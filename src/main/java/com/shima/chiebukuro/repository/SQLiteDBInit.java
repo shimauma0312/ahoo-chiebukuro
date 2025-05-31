@@ -2,6 +2,7 @@ package com.shima.chiebukuro.repository;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -16,7 +17,8 @@ public class SQLiteDBInit {
                 + "    id INTEGER PRIMARY KEY AUTOINCREMENT,\n"
                 + "    title TEXT NOT NULL,\n"
                 + "    content TEXT NOT NULL,\n"
-                + "    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP\n"
+                + "    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,\n"
+                + "    empathy_count INTEGER DEFAULT 0\n"
                 + ");";
 
         String createAnswersTable = "CREATE TABLE IF NOT EXISTS answers (\n"
@@ -25,6 +27,7 @@ public class SQLiteDBInit {
                 + "    answer TEXT NOT NULL,\n"
                 + "    responder_name TEXT,\n"
                 + "    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,\n"
+                + "    empathy_count INTEGER DEFAULT 0,\n"
                 + "    FOREIGN KEY (question_id) REFERENCES questions (id)\n"
                 + ");";
 
@@ -37,9 +40,32 @@ public class SQLiteDBInit {
             // Create answers table
             stmt.execute(createAnswersTable);
 
+            // カラムが存在するかチェックして、なければ追加する
+            addColumnIfNotExists(conn, "questions", "empathy_count", "INTEGER DEFAULT 0");
+            addColumnIfNotExists(conn, "answers", "empathy_count", "INTEGER DEFAULT 0");
+
             System.out.println("Tables created successfully.");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+        }
+    }
+    
+    // テーブルにカラムを追加するヘルパーメソッド
+    private static void addColumnIfNotExists(Connection conn, String tableName, String columnName, String columnType) throws SQLException {
+        boolean columnExists = false;
+        
+        // カラムが存在するかチェック
+        try (ResultSet rs = conn.getMetaData().getColumns(null, null, tableName, columnName)) {
+            columnExists = rs.next();
+        }
+        
+        // カラムが存在しなければ追加
+        if (!columnExists) {
+            try (Statement stmt = conn.createStatement()) {
+                String sql = String.format("ALTER TABLE %s ADD COLUMN %s %s", tableName, columnName, columnType);
+                stmt.execute(sql);
+                System.out.println("Added column " + columnName + " to table " + tableName);
+            }
         }
     }
 }
