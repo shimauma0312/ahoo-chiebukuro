@@ -17,10 +17,15 @@ import com.shima.chiebukuro.model.Question;
 @Component
 public class SQLiteDBOperations {
 
+    private String getDbUrl() {
+        String dbPath = System.getProperty("sqlite.db.path", "/app/data/app.db");
+        return "jdbc:sqlite:" + dbPath;
+    }
+
     public void insertQuestion(String title, String question) {
         String sql = "INSERT INTO questions(title, content) VALUES(?, ?)";
 
-        try (Connection conn = DriverManager.getConnection("jdbc:sqlite:app.db");
+        try (Connection conn = DriverManager.getConnection(getDbUrl());
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, title);
             pstmt.setString(2, question);
@@ -34,7 +39,7 @@ public class SQLiteDBOperations {
         String sql = "SELECT id, title, content, created_at FROM questions";
         List<Question> questions = new ArrayList<>();
 
-        try (Connection conn = DriverManager.getConnection("jdbc:sqlite:app.db");
+        try (Connection conn = DriverManager.getConnection(getDbUrl());
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(sql)) {
 
@@ -56,7 +61,7 @@ public class SQLiteDBOperations {
         String sql = "SELECT id, title, content, created_at FROM questions WHERE id = ?";
         Question questions = null;
 
-        try (Connection conn = DriverManager.getConnection("jdbc:sqlite:app.db");
+        try (Connection conn = DriverManager.getConnection(getDbUrl());
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, queryid);
             ResultSet rs = pstmt.executeQuery();
@@ -79,7 +84,7 @@ public class SQLiteDBOperations {
         int questionId = Integer.parseInt(questionIdStr);
         String sql = "INSERT INTO answers(question_id, responder_name, answer) VALUES(?, ?, ?)";
 
-        try (Connection conn = DriverManager.getConnection("jdbc:sqlite:app.db");
+        try (Connection conn = DriverManager.getConnection(getDbUrl());
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, questionId);
             pstmt.setString(2, answer);
@@ -94,7 +99,7 @@ public class SQLiteDBOperations {
         String sql = "SELECT question_id, responder_name, answer, created_at FROM answers WHERE question_id = ?";
         List<Answer> answers = new ArrayList<>();
 
-        try (Connection conn = DriverManager.getConnection("jdbc:sqlite:app.db");
+        try (Connection conn = DriverManager.getConnection(getDbUrl());
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, Integer.parseInt(questionId));
             ResultSet rs = pstmt.executeQuery();
