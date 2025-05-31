@@ -13,11 +13,11 @@ public class AnswerForm {
 
     private String questionId;
 
-    public String getRespondent() {
+    public String getResponderName() {
         return responderName;
     }
 
-    public void setRespondent(String respondent) {
+    public void setResponderName(String respondent) {
         this.responderName = respondent;
     }
 

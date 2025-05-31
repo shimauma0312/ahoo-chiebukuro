@@ -1,4 +1,4 @@
-main {
+body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
     margin: 0;
@@ -52,7 +52,7 @@ form {
     display: flex;
     flex-direction: column;
     width: 80%;
-    background-color: white;
+    max-width: 500px;
 }
 
 form input[type="text"] {
@@ -86,3 +86,17 @@ form input[type="submit"] {
 padding-bottom: 10px;
 }
 
+#home-link {
+    display: inline-block;
+    color: #007BFF;
+    padding: 10px 20px;
+    margin: 20px;
+    text-decoration: none;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+#home-link:hover {
+    text-decoration: underline;
+}

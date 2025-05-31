@@ -9,18 +9,20 @@
 </head>
 
 <body>
-	<main>
-		<h1>質問を入力</h1>
-		<form class="form-area" method="post" action="/insertQuestion" th:action="@{insertQuestion}">
-			<p>あなたの疑問を入力してね</p>
-			<input type="text" name="title" th:field="${questionForm.title}">
-			<p style="color:red;" th:errors="${questionForm.title}">タイトルを入れてください </p>
+	<div>
+		<a href="/home" id="home-link">Home</a>
+	</div>
 
-			<textarea type="text" name="question" th:field="${questionForm.question}"></textarea>
-			<p style="color:red;" th:errors="${questionForm.question}">内容を入れてください </p>
-			<input type="submit" value="送信">
-		</form>
-	</main>
+	<h1>質問を入力</h1>
+	<form class="flex-form" method="post" action="/insertQuestion" th:action="@{insertQuestion}">
+		<p>あなたの疑問を入力してね</p>
+		<input type="text" name="title" th:field="${questionForm.title}">
+		<p style="color:red;" th:errors="${questionForm.title}">タイトルを入れてください </p>
+
+		<textarea type="text" name="question" th:field="${questionForm.question}"></textarea>
+		<p style="color:red;" th:errors="${questionForm.question}">内容を入れてください </p>
+		<input type="submit" value="送信">
+	</form>
 </body>
 
 </html>
