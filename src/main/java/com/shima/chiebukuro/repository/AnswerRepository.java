@@ -9,4 +9,6 @@ public interface AnswerRepository {
     void insertAnswer(AnswerForm answerForm);
 
     List<Answer> findByAnswerContent(String id);
+    
+    void incrementEmpathyCount(int answerId);
 }

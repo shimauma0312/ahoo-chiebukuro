@@ -23,4 +23,9 @@ public class AnswerRepositoryImpl implements AnswerRepository {
         List<Answer> answers = sqLiteDBOperations.selectAnswer(id);
         return answers;
     }
+    
+    @Override
+    public void incrementEmpathyCount(int answerId) {
+        sqLiteDBOperations.incrementEmpathyCount(answerId);
+    }
 }

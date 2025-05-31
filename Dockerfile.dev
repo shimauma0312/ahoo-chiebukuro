@@ -1,9 +1,14 @@
-FROM openjdk:17-jdk-slim
+FROM openjdk:21-jdk-slim
 
 # 必要なパッケージのインストール
 RUN apt-get update && apt-get install -y sqlite3 curl
 
 WORKDIR /app
+
+# Maven Wrapper ファイルをコピーして実行権限を付与
+COPY mvnw .
+COPY .mvn .mvn
+RUN chmod +x ./mvnw
 
 # データディレクトリの作成
 RUN mkdir -p /app/data
@@ -15,5 +20,5 @@ ENV SPRING_JPA_DATABASE-PLATFORM=org.hibernate.community.dialect.SQLiteDialect
 EXPOSE 8080
 EXPOSE 5005
 
-# マウントされるファイルなのでCOPYはしない
+# マウントされるなのでCOPYはしない
 CMD ["./mvnw", "spring-boot:run", "-Dspring-boot.run.jvmArguments='-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005'"]
