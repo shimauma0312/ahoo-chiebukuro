@@ -1,0 +1,37 @@
+{
+    "name": "Ahoo Chiebukuro Dev Container",
+    // "dockerFile": "../docker-compose.yml", // Docker Compose ファイルのパスを指定 // この行をコメントアウトまたは削除
+    "dockerComposeFile": ["../docker-compose.yml"], // Docker Compose ファイルのパスを指定
+    "service": "app", // docker-compose.yml で定義したサービス名を指定
+    "workspaceFolder": "/app", // docker-compose.yml の volumes マウント先に合わせる
+    // コンテナ内で開くファイルやフォルダを指定できます (オプション)
+    // "openFiles": ["src/main/java/com/shima/chiebukuro/AhooChiebukuroApplication.java"],
+    // VS Code の設定をコンテナ内で上書きします (オプション)
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "java.compile.nullAnalysis.mode": "automatic",
+                "java.debug.settings.hotCodeReplace": "auto",
+                "maven.executable.path": "/app/mvnw" // コンテナ内の mvnw のパスを修正
+            },
+            "extensions": [
+                "vscjava.vscode-java-pack",
+                "vmware.vscode-boot-dev-pack",
+                "github.copilot-chat",
+                "github.copilot"
+            ]
+        }
+    }
+
+    // コンテナ作成後に実行するコマンド (例: 依存関係のインストール)
+    // "postCreateCommand": "mvnw clean install -DskipTests",
+
+    // コンテナ起動後に実行するコマンド (例: アプリケーションの起動)
+    // "postStartCommand": "mvnw spring-boot:run",
+
+    // コンテナ実行時の引数 (オプション)
+    // "runArgs": ["--env-file", ".env"],
+
+    // リモートユーザー (Dockerfileでユーザーが作成されている場合)
+    // "remoteUser": "vscode"
+}
