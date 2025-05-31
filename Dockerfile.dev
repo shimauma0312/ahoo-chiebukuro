@@ -1,0 +1,18 @@
+FROM openjdk:17-jdk-slim
+
+# 必要なパッケージのインストール
+RUN apt-get update && apt-get install -y sqlite3
+
+WORKDIR /app
+
+# データディレクトリの作成
+RUN mkdir -p /app/data
+
+# デフォルトのアプリケーションプロパティを定義
+ENV SPRING_DATASOURCE_URL=jdbc:sqlite:/app/data/app.db
+ENV SPRING_JPA_DATABASE-PLATFORM=org.hibernate.community.dialect.SQLiteDialect
+
+EXPOSE 8080
+
+# マウントされるファイルなのでCOPYはしない
+CMD ["./mvnw", "spring-boot:run", "-Dspring-boot.run.jvmArguments='-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005'"]
