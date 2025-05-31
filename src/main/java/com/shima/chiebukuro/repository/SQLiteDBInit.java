@@ -7,8 +7,9 @@ import java.sql.Statement;
 
 public class SQLiteDBInit {
     public static void setup() {
-        // SQLite connection string
-        String url = "jdbc:sqlite:app.db";
+        // SQLite connection string - 環境変数かプロパティから取得するとより柔軟になります
+        String dbPath = System.getProperty("sqlite.db.path", "/app/data/app.db");
+        String url = "jdbc:sqlite:" + dbPath;
 
         // SQL statements for creating tables
         String createQuestionsTable = "CREATE TABLE IF NOT EXISTS questions (\n"
