@@ -9,19 +9,24 @@
 </head>
 
 <body>
+    <div>
+        <a href="/home" id="home-link">AHOO知恵袋</a>
+    </div>
     <!--質問フォームのボタン-->
     <a class="ask-button" href="/form">質問する</a>
 
-    <div th:if="${#lists.isEmpty(titles)}">
-        何も質問がないようです
-    </div>
-    <a th:each="title : ${titles}" class="card" th:href="@{/question/{id}(id=${title.id})}">
-        <h2 th:text="${title.title}"></h2>
-        <div id="question-status">
-            <p>共感:11</p>
-            <p th:text="${title.createdTime}"></p>
+    <div class="questions-list-container">
+        <div th:if="${#lists.isEmpty(titles)}">
+            何も質問がないようです
         </div>
-    </a>
+        <a th:each="title : ${titles}" class="card" th:href="@{/question/{id}(id=${title.id})}">
+            <h2 th:text="${title.title}"></h2>
+            <div id="question-status">
+                <p>共感:11</p>
+                <p th:text="${title.createdTime}"></p>
+            </div>
+        </a>
+    </div>
 </body>
 
 </html>

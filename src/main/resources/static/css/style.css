@@ -1,102 +1,238 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    font-family: 'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, Osaka, 'MS PGothic', Arial, sans-serif; /* ヤフー知恵袋風フォント */
+    background-color: #f0f2f5; /* 少し明るいグレー */
     margin: 0;
     padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100vh;
+    color: #333; /* 基本テキスト色 */
 }
 
-.heading-style {
-    padding: 0.5rem;
+/* ヘッダー的な役割 */
+div:has(> #home-link) {
+    background-color: #7B3F00; /* アホっぽい茶色 */
+    padding: 10px 0;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 20px;
 }
+
+#home-link {
+    color: #FFD700; /* アホっぽい黄色 */
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+#home-link:hover {
+    text-decoration: underline;
+}
+
+h1 {
+    color: #D2691E; /* アホっぽいオレンジ */
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 28px;
+}
+
+.heading-style { /* 質問、回答の見出し */
+    color: #D2691E; /* アホっぽいオレンジ */
+    font-size: 22px;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #FFD700; /* アホっぽい黄色 */
+    padding-bottom: 5px;
+    text-align: left; /* 左寄せに変更 */
+    width: 80%;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 
 .ask-button {
-    display: inline-block;
-    background-color: #007BFF;
-    color: white;
-    padding: 10px 20px;
-    margin: 20px;
-    border-radius: 5px;
+    display: block; /* ブロック要素にして中央揃えしやすくする */
+    background-color: #FFC107; /* 目立つ黄色 */
+    color: #333;
+    padding: 15px 30px;
+    margin: 20px auto; /* 上下マージンと左右自動で中央揃え */
+    border-radius: 8px;
     text-decoration: none;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+    width: fit-content; /* コンテンツに合わせた幅 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.ask-button:hover {
+    background-color: #FFB300; /* ホバー時少し濃い黄色 */
 }
 
 .card {
-    background-color: white;
-    margin: 2px;
-    padding: 10px 20px 10px;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: #fff; /* 白色 */
+    margin: 15px auto; /* 上下マージンと左右自動で中央揃え */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     width: 80%;
-    max-width: 500px;
+    max-width: 600px;
     overflow-wrap: break-word;
 }
 
-h1 , .card h2 {
+.card h2 {
     margin-top: 0;
-    color: #007BFF;
+    color: #005CAF; /* 知的な青 */
+    font-size: 20px;
+    margin-bottom: 10px;
 }
 
 .card p {
     color: #333;
+    line-height: 1.6;
 }
 
 #question-status {
     display: flex;
     justify-content: space-between;
+    font-size: 12px; /* 少し小さく */
+    color: #777; /* やや薄いグレー */
+    margin-top: 15px;
 }
 
-form {
+/* フォーム全体 */
+.flex-form {
     display: flex;
     flex-direction: column;
     width: 80%;
-    max-width: 500px;
+    max-width: 600px;
+    margin: 20px auto; /* 中央揃え */
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-form input[type="text"] {
-    margin-bottom: 10px;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-    width: 100%; /* 幅を最大にします */
-    height: 40px; /* 高さを40pxに設定します */
+.flex-form p:first-of-type { /* 「あなたの疑問を入力してね」など */
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+
+form input[type="text"],
+form textarea {
+    margin-bottom: 15px;
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    width: calc(100% - 24px); /* paddingを考慮した幅 */
+    font-size: 16px;
 }
 
 form textarea {
-    margin-bottom: 10px;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-    width: 100%; /* 幅を最大にします */
-    height: 150px; /* 高さを150pxに設定します */
+    height: 120px; /* 少し小さく */
+    resize: vertical; /* 縦方向のみリサイズ可 */
 }
 
 form input[type="submit"] {
-    background-color: #007BFF;
+    background-color: #FF9800; /* アホっぽいオレンジ */
     color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
+    padding: 12px 25px;
+    border-radius: 6px;
     border: none;
     cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
 }
 
-#answer > * {
-padding-bottom: 10px;
+form input[type="submit"]:hover {
+    background-color: #F57C00; /* ホバー時濃いオレンジ */
 }
 
-#home-link {
-    display: inline-block;
-    color: #007BFF;
-    padding: 10px 20px;
-    margin: 20px;
-    text-decoration: none;
-    position: absolute;
-    top: 20px;
-    left: 20px;
+/* エラーメッセージ */
+p[style="color:red;"] {
+    font-size: 13px;
+    margin-top: -10px; /* 上の要素との間隔を詰める */
+    margin-bottom: 10px;
 }
 
-#home-link:hover {
-    text-decoration: underline;
+
+#answer { /* 回答カードのスタイル */
+    border-top: 1px dashed #ddd; /* 回答ごとの区切り線 */
+    padding-top: 15px;
+}
+
+#answer h2 { /* 回答者の名前 */
+    color: #28a745; /* 親しみやすい緑 */
+    font-size: 18px;
+}
+
+#answer p { /* 回答内容、日付 */
+    font-size: 15px;
+}
+
+#answer p:last-of-type { /* 日付 */
+    font-size: 12px;
+    color: #777;
+    text-align: right;
+}
+
+#star-btn {
+    background-color: #FFEB3B; /* 目立つ黄色 */
+    color: #333;
+    border: 1px solid #FBC02D;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+#star-btn:hover {
+    background-color: #FDD835;
+}
+
+/* home.html の質問がない場合のメッセージ */
+div[th\:if="${#lists.isEmpty(titles)}"] {
+    text-align: center;
+    font-size: 18px;
+    color: #777;
+    margin-top: 50px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    width: 80%;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* question.html の回答がない場合のメッセージ */
+div[th\:if="${#lists.isEmpty(answers)}"] {
+    text-align: center;
+    font-size: 16px;
+    color: #777;
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.gap { /* 回答間のスペース */
+    margin-bottom: 20px !important;
+}
+
+/* home.html の質問カードのコンテナ */
+.questions-list-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 中央揃え */
+    width: 100%;
 }

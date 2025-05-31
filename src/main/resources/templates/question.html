@@ -24,10 +24,10 @@
     <form class="flex-form" method="post" action="/insertAnswer" th:action="@{insertAnswer}">
         <input type="hidden" name="questionId" th:value="${question.id}">
         <p>質問に答える</p>
-        <input type="text" name="respondent" th:field=="${answerForm.responderName}">
+        <input type="text" name="respondent" th:field=="${answerForm.responderName}" placeholder="お名前（ニックネーム可）">
 
-        <textarea name="answer" th:field=="${answerForm.answer}"></textarea>
-        <p style="color:red;" th:errors="${answerForm.answer}">回答を入れてください </p>
+        <textarea name="answer" th:field=="${answerForm.answer}" placeholder="回答文"></textarea>
+        <p style="color:red;" th:errors="${answerForm.answer}" >回答を入れてください </p>
         <input type="submit" value="回答する">
     </form>
 
