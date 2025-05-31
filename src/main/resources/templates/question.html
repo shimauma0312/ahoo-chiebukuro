@@ -9,38 +9,37 @@
 </head>
 
 <body>
-    <main>
-        <h1 class="heading-style">質問</h1>
-        <div class="card">
-            <h2 th:text="${question.title}"></h2>
-            <p th:text="${question.content}"></p>
-        </div>
+    <h1 class="heading-style">質問</h1>
+    <div class="card">
+        <h2 th:text="${question.title}"></h2>
+        <p th:text="${question.content}"></p>
+    </div>
 
-        <h1 class="heading-style">回答</h1>
+    <h1 class="heading-style">回答</h1>
 
-        <form class="form-area" method="post" action="/insertAnswer" th:action="@{insertAnswer}">
-            <input type="hidden" name="questionId" th:value="${question.id}">
-            <p>質問に答える</p>
-            <input type="text" name="respondent" th:field=="${answerForm.respondent}">
+    <form class="flex-form" method="post" action="/insertAnswer" th:action="@{insertAnswer}">
+        <input type="hidden" name="questionId" th:value="${question.id}">
+        <p>質問に答える</p>
+        <input type="text" name="respondent" th:field=="${answerForm.respondent}">
 
-            <textarea name="answer" th:field=="${answerForm.answer}"></textarea>
-            <p style="color:red;" th:errors="${answerForm.answer}">回答を入れてください </p>
-            <input type="submit" value="回答する">
-        </form>
+        <textarea name="answer" th:field=="${answerForm.answer}"></textarea>
+        <p style="color:red;" th:errors="${answerForm.answer}">回答を入れてください </p>
+        <input type="submit" value="回答する">
+    </form>
 
-        <div th:if="${#lists.isEmpty(answers)}">
-            まだ回答がないようです
-        </div>
+    <div th:if="${#lists.isEmpty(answers)}">
+        まだ回答がないようです
+    </div>
 
-        <div th:each="answer : ${answers}" class="card gap" id="answer">
-            <h2 th:text="${answer.name}"></h2>
-            <p th:text="${answer.answer}"></p>
-            <p th:text="${answer.date}"></p>
-            <button id="star-btn">
-                役に立った
-            </button>
-        </div>
-    </main>
+    <div th:each="answer : ${answers}" class="card gap" id="answer">
+        <h2 th:text="${answer.name}"></h2>
+        <p th:text="${answer.answer}"></p>
+        <p th:text="${answer.date}"></p>
+        <button id="star-btn">
+            役に立った
+        </button>
+    </div>
+
 </body>
 
 </html>
