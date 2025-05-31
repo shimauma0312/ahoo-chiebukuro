@@ -12,4 +12,6 @@ public interface QuestionRepository {
     Question findByQuestionContent(String id);
 
     List<Question> findAll();
+    
+    void incrementEmpathyCount(int questionId);
 }
