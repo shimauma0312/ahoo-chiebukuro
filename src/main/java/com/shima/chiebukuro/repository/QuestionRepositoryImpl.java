@@ -32,4 +32,9 @@ public class QuestionRepositoryImpl implements QuestionRepository {
         questions = sqLiteDBOperations.selectQuestions();
         return questions;
     }
+    
+    @Override
+    public void incrementEmpathyCount(int questionId) {
+        sqLiteDBOperations.incrementQuestionEmpathyCount(questionId);
+    }
 }

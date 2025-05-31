@@ -12,5 +12,7 @@ public interface QuestionService {
     Question findByQuestionContent(String id);
 
     void insertQuestion(QuestionForm questionForm);
+    
+    void incrementEmpathyCount(int questionId);
 
 }

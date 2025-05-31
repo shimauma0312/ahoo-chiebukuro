@@ -36,7 +36,10 @@ public class SQLiteDBOperations {
     }
 
     public List<Question> selectQuestions() {
-        String sql = "SELECT id, title, content, created_at FROM questions";
+        String sql = "SELECT id, title, content, created_at, "
+                + "CASE WHEN EXISTS (SELECT 1 FROM pragma_table_info('questions') WHERE name='empathy_count') "
+                + "THEN empathy_count ELSE 0 END AS empathy_count "
+                + "FROM questions";
         List<Question> questions = new ArrayList<>();
 
         try (Connection conn = DriverManager.getConnection(getDbUrl());
@@ -48,7 +51,8 @@ public class SQLiteDBOperations {
                 String title = rs.getString("title");
                 String content = rs.getString("content");
                 String createdTime = rs.getString("created_at");
-                questions.add(new Question(id, title, content, createdTime));
+                int empathyCount = rs.getInt("empathy_count");
+                questions.add(new Question(id, title, content, createdTime, empathyCount));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -58,7 +62,10 @@ public class SQLiteDBOperations {
     }
 
     public Question selectQuestion(String queryid) {
-        String sql = "SELECT id, title, content, created_at FROM questions WHERE id = ?";
+        String sql = "SELECT id, title, content, created_at, "
+                + "CASE WHEN EXISTS (SELECT 1 FROM pragma_table_info('questions') WHERE name='empathy_count') "
+                + "THEN empathy_count ELSE 0 END AS empathy_count "
+                + "FROM questions WHERE id = ?";
         Question questions = null;
 
         try (Connection conn = DriverManager.getConnection(getDbUrl());
@@ -71,7 +78,8 @@ public class SQLiteDBOperations {
                 String title = rs.getString("title");
                 String content = rs.getString("content");
                 String createdTime = rs.getString("created_at");
-                questions = new Question(id, title, content, createdTime);
+                int empathyCount = rs.getInt("empathy_count");
+                questions = new Question(id, title, content, createdTime, empathyCount);
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -87,8 +95,8 @@ public class SQLiteDBOperations {
         try (Connection conn = DriverManager.getConnection(getDbUrl());
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, questionId);
-            pstmt.setString(2, answer);
-            pstmt.setString(3, respondent);
+            pstmt.setString(2, respondent);
+            pstmt.setString(3, answer);
             pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -96,7 +104,10 @@ public class SQLiteDBOperations {
     }
 
     public List<Answer> selectAnswer(String questionId) {
-        String sql = "SELECT question_id, responder_name, answer, created_at FROM answers WHERE question_id = ?";
+        String sql = "SELECT id, question_id, responder_name, answer, created_at, "
+                + "CASE WHEN EXISTS (SELECT 1 FROM pragma_table_info('answers') WHERE name='empathy_count') "
+                + "THEN empathy_count ELSE 0 END AS empathy_count "
+                + "FROM answers WHERE question_id = ?";
         List<Answer> answers = new ArrayList<>();
 
         try (Connection conn = DriverManager.getConnection(getDbUrl());
@@ -105,16 +116,42 @@ public class SQLiteDBOperations {
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
+                int id = rs.getInt("id");
                 String questionIdValue = String.valueOf(rs.getInt("question_id"));
                 String respondent = rs.getString("responder_name");
                 String answer = rs.getString("answer");
                 String createdTime = rs.getString("created_at");
-                answers.add(new Answer(questionIdValue, answer, respondent, createdTime));
+                int empathyCount = rs.getInt("empathy_count");
+                answers.add(new Answer(id, questionIdValue, answer, respondent, createdTime, empathyCount));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
 
         return answers;
+    }
+    
+    public void incrementEmpathyCount(int answerId) {
+        String sql = "UPDATE answers SET empathy_count = empathy_count + 1 WHERE id = ?";
+
+        try (Connection conn = DriverManager.getConnection(getDbUrl());
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, answerId);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void incrementQuestionEmpathyCount(int questionId) {
+        String sql = "UPDATE questions SET empathy_count = empathy_count + 1 WHERE id = ?";
+
+        try (Connection conn = DriverManager.getConnection(getDbUrl());
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, questionId);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

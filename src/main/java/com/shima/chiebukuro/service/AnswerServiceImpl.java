@@ -28,5 +28,10 @@ public class AnswerServiceImpl implements AnswerService {
     public void insertAnswer(AnswerForm answerForm) {
         answerRepository.insertAnswer(answerForm);
     }
+    
+    @Override
+    public void incrementEmpathyCount(int answerId) {
+        answerRepository.incrementEmpathyCount(answerId);
+    }
 
 }

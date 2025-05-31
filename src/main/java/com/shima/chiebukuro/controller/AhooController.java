@@ -7,6 +7,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.shima.chiebukuro.model.AnswerForm;
 import com.shima.chiebukuro.model.QuestionForm;
@@ -64,5 +65,19 @@ public class AhooController {
         }
         String redirectPath = String.format("redirect:/question/%s", answerForm.getQuestionId());
         return redirectPath;
+    }
+    
+    @PostMapping("/answer/empathy/{id}")
+    @ResponseBody
+    public String incrementEmpathy(@PathVariable("id") int answerId) {
+        answerService.incrementEmpathyCount(answerId);
+        return "success";
+    }
+    
+    @PostMapping("/question/empathy/{id}")
+    @ResponseBody
+    public String incrementQuestionEmpathy(@PathVariable("id") int questionId) {
+        questionService.incrementEmpathyCount(questionId);
+        return "success";
     }
 }

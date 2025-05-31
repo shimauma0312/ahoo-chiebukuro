@@ -10,5 +10,7 @@ public interface AnswerService {
     List<Answer> findByAnswerContent(String id);
 
     void insertAnswer(AnswerForm answerForm);
+    
+    void incrementEmpathyCount(int answerId);
 
 }

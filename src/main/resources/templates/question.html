@@ -6,6 +6,7 @@
     <title>AHOO知恵袋</title>
     <link rel="stylesheet" type="text/css" href="/css/reset.css">
     <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
@@ -20,30 +21,56 @@
     </div>
 
     <!--回答フォーム-->
-    <h1 class="heading-style">回答</h1>
-    <form class="flex-form" method="post" action="/insertAnswer" th:action="@{insertAnswer}">
+    <h1 class="heading-style">回答</h1>    <form class="flex-form" method="post" action="/insertAnswer" th:action="@{insertAnswer}">
         <input type="hidden" name="questionId" th:value="${question.id}">
         <p>質問に答える</p>
-        <input type="text" name="respondent" th:field=="${answerForm.responderName}">
+        <input type="text" name="respondent" th:field=="${answerForm.responderName}" placeholder="お名前（ニックネーム可）">
 
-        <textarea name="answer" th:field=="${answerForm.answer}"></textarea>
-        <p style="color:red;" th:errors="${answerForm.answer}">回答を入れてください </p>
+        <textarea name="answer" th:field=="${answerForm.answer}" placeholder="回答文"></textarea>
+        <p style="color:red;" th:errors="${answerForm.answer}" >回答を入れてください </p>
         <input type="submit" value="回答する">
     </form>
 
-    <div th:if="${#lists.isEmpty(answers)}">
-        まだ回答がないようです
+    <div th:if="${#lists.isEmpty(answers)}" class="no-answers-message">
+        <span>まだ回答がないようです</span>
     </div>
 
-    <div th:each="answer : ${answers}" class="card gap" id="answer">
+    <div th:each="answer : ${answers}" class="card gap" th:id="'answer-' + ${answer.id}">
         <h2 th:text="${answer.name}"></h2>
         <p th:text="${answer.answer}"></p>
-        <p th:text="${answer.date}"></p>
-        <button id="star-btn">
-            役に立った
-        </button>
+        <p th:text="${answer.date}"></p>        <div class="empathy-container">
+            <button class="star-btn" th:data-id="${answer.id}">
+                共感
+            </button>
+            <span class="empathy-count" th:text="${answer.empathyCount} + ' 人が共感'"></span>
+        </div>
     </div>
 
+    <script>
+        $(document).ready(function() {
+            $('.star-btn').click(function() {
+                const answerId = $(this).data('id');
+                const btn = $(this);
+                
+                $.ajax({
+                    url: '/answer/empathy/' + answerId,
+                    type: 'POST',
+                    success: function(result) {
+                        // ボタンを押した後の処理
+                        const countElement = btn.siblings('.empathy-count');
+                        const currentCount = parseInt(countElement.text());
+                        countElement.text((currentCount + 1) + ' 人が共感');
+                        
+                        // ボタンを一時的に無効化（連打防止）
+                        btn.prop('disabled', true);
+                        setTimeout(function() {
+                            btn.prop('disabled', false);
+                        }, 1000);
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>
