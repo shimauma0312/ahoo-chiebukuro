@@ -33,4 +33,9 @@ public class QuestionServiceImpl implements QuestionService {
     public void insertQuestion(QuestionForm questionForm) {
         questionRepository.insertQuestion(questionForm);
     }
+    
+    @Override
+    public void incrementEmpathyCount(int questionId) {
+        questionRepository.incrementEmpathyCount(questionId);
+    }
 }
