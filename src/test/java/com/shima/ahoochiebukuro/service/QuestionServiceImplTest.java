@@ -32,7 +32,7 @@ public class QuestionServiceImplTest {
     @Test
     public void testFindByQuestions() {
         // テスト用のQuestionオブジェクトを作成
-        Question question = new Question(1, "タイトル", "コンテンツ", "んー時間");
+        Question question = new Question(1, "タイトル", "コンテンツ", "んー時間", 0);
 
         // questionRepository.findAll()が呼ばれたときに、作成したQuestionオブジェクトを返すように設定
         when(questionRepository.findAll()).thenReturn(Collections.singletonList(question));
