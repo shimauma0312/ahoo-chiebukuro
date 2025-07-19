@@ -46,7 +46,7 @@ public class QuestionRepositoryImplTest {
     @Test
     public void testFindByQuestionContent() {
         // テスト用のQuestionオブジェクトを作成
-        Question question = new Question(1, "タイトル", "質問内容", "何か時間");
+        Question question = new Question(1, "タイトル", "質問内容", "何か時間", 0);
 
         // findByQuestionContentが呼ばれたときに、作成したQuestionオブジェクトを返すように設定
         when(sqLiteDBOperations.selectQuestion("1")).thenReturn(question);
@@ -61,7 +61,7 @@ public class QuestionRepositoryImplTest {
     @Test
     public void testFindAll() {
         // テスト用のQuestionオブジェクトのリストを作成
-        Question question = new Question(1, "タイトル", "質問内容", "なんか時間");
+        Question question = new Question(1, "タイトル", "質問内容", "なんか時間", 0);
         List<Question> questionList = Collections.singletonList(question);
 
         // findAllが呼ばれたときに、作成したリストを返すように設定
