@@ -1,24 +1,7 @@
-FROM openjdk:17-jdk-slim AS build
+FROM eclipse-temurin:21-jdk-jammy
 
 WORKDIR /app
 
-COPY mvnw .
-COPY pom.xml .
-COPY src src
+RUN apt-get update && apt-get install -y sqlite3 curl git
 
-RUN chmod +x ./mvnw
-RUN ./mvnw package -DskipTests
-
-FROM openjdk:17-jdk-slim
-WORKDIR /app
-
-# SQLite3のインストール
-RUN apt-get update && apt-get install -y sqlite3
-
-# データディレクトリの作成
-RUN mkdir -p /app/data
-
-COPY --from=build /app/target/*.jar app.jar
-
-EXPOSE 8080
-CMD ["java", "-jar", "app.jar"]
+CMD ["./mvnw", "spring-boot:run"]

@@ -1,25 +1,25 @@
-version: '3.8'
-
 services:
   app:
     build:
       context: .
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
     ports:
       - "8080:8080"
-      - "5005:5005"  # デバッグポート
+      - "5005:5005"
     volumes:
       - ./:/app
       - sqlite-data:/app/data
-      - ~/.m2:/root/.m2  # Mavenキャッシュの共有
+      - ~/.m2:/root/.m2
     environment:
       - SPRING_PROFILES_ACTIVE=dev
       - SPRING_DATASOURCE_URL=jdbc:sqlite:/app/data/app.db
-    restart: unless-stopped
+    command: ./mvnw spring-boot:run #  If 'mvnw' is not executable, run 'chmod +x mvnw'.
+    stop_grace_period: 1s
+    restart: "no"
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080"]
-      interval: 1m
-      timeout: 10s
+      test: [ "CMD", "curl", "-f", "http://localhost:8080/actuator/health" ]
+      interval: 10s
+      timeout: 5s
       retries: 3
       start_period: 30s
 
