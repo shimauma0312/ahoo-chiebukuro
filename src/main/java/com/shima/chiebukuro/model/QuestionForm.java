@@ -13,6 +13,8 @@ public class QuestionForm {
     @Pattern(regexp = ".{1,255}", message = "質問内容は255文字以内で入力してください")
     private String question;
 
+    private Long userId;
+
     public String getTitle() {
         return title;
     }
@@ -27,5 +29,13 @@ public class QuestionForm {
 
     public void setQuestion(String question) {
         this.question = question;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }

@@ -7,6 +7,7 @@ public class Answer {
     private String responderName;
     private String date;
     private int empathyCount;
+    private Long userId;
 
     public Answer(int id, String questionId, String answer, String name, String date, int empathyCount) {
         this.id = id;
@@ -15,6 +16,16 @@ public class Answer {
         this.responderName = name;
         this.date = date;
         this.empathyCount = empathyCount;
+    }
+
+    public Answer(int id, String questionId, String answer, String name, String date, int empathyCount, Long userId) {
+        this.id = id;
+        this.questionId = questionId;
+        this.answer = answer;
+        this.responderName = name;
+        this.date = date;
+        this.empathyCount = empathyCount;
+        this.userId = userId;
     }
 
     public int getId() {
@@ -39,5 +50,13 @@ public class Answer {
     
     public int getEmpathyCount() {
         return empathyCount;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }

@@ -13,6 +13,8 @@ public class AnswerForm {
 
     private String questionId;
 
+    private Long userId;
+
     public String getResponderName() {
         return responderName;
     }
@@ -35,6 +37,18 @@ public class AnswerForm {
 
     public void setQuestionId(String questionId) {
         this.questionId = questionId;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public void setResponder(String responder) {
+        this.responderName = responder;
     }
 
 }
