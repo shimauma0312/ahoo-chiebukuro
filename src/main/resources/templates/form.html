@@ -1,20 +1,78 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
 	<meta charset="UTF-8">
 	<title>AHOO知恵袋</title>
 	<link rel="stylesheet" type="text/css" href="/css/reset.css">
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
+	<style>
+		.header-container {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 10px 20px;
+			background-color: #000;
+		}
+	
+		.header-left {
+			display: flex;
+			align-items: center;
+			gap: 15px;
+		}
+	
+		.logo-img {
+			height: 50px;
+			width: auto;
+		}
+	
+		.user-info {
+			display: flex;
+			align-items: center;
+			gap: 15px;
+			color: white;
+		}
+	
+		.logout-btn {
+			padding: 8px 16px;
+			background-color: #dc3545;
+			color: white;
+			border: none;
+			border-radius: 4px;
+			cursor: pointer;
+			text-decoration: none;
+			font-size: 14px;
+		}
+	
+		.logout-btn:hover {
+			background-color: #c82333;
+		}
+	
+		.main-container {
+			max-width: 600px;
+			margin: 30px auto;
+			padding: 20px;
+		}
+	</style>
 </head>
 
 <body>
-	<div>
-		<a href="/home" id="home-link">Home</a>
+	<div class="header-container">
+		<div class="header-left">
+			<img src="/img/logo.png" alt="AHOO知恵袋ロゴ" class="logo-img">
+			<a href="/home" id="home-link">Home</a>
+		</div>
+		<div class="user-info" sec:authorize="isAuthenticated()">
+			<span>ようこそ、<strong sec:authentication="name"></strong>さん</span>
+			<form th:action="@{/logout}" method="post" style="margin: 0;">
+				<button type="submit" class="logout-btn">ログアウト</button>
+			</form>
+		</div>
 	</div>
 
-	<h1>質問を入力</h1>
-	<form class="flex-form" method="post" action="/insertQuestion" th:action="@{insertQuestion}">
+	<div class="main-container">
+		<h1>質問を入力</h1>
+		<form class=" flex-form" method="post" action="/insertQuestion" th:action="@{insertQuestion}">
 		<p>あなたの疑問を入力してね</p>
 		<input type="text" name="title" th:field="${questionForm.title}">
 		<p style="color:red;" th:errors="${questionForm.title}">タイトルを入れてください </p>
@@ -22,7 +80,8 @@
 		<textarea type="text" name="question" th:field="${questionForm.question}"></textarea>
 		<p style="color:red;" th:errors="${questionForm.question}">内容を入れてください </p>
 		<input type="submit" value="送信">
-	</form>
+		</form>
+	</div>
 </body>
 
 </html>

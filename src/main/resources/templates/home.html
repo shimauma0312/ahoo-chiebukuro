@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <meta charset="UTF-8">
@@ -7,35 +7,163 @@
     <link rel="stylesheet" type="text/css" href="/css/reset.css">
     <link rel="stylesheet" type="text/css" href="/css/style.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #000;
+        }
+    
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+    
+        .logo-img {
+            height: 50px;
+            width: auto;
+        }
+    
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: white;
+        }
+    
+        .logout-btn {
+            padding: 8px 16px;
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 14px;
+        }
+    
+        .logout-btn:hover {
+            background-color: #c82333;
+        }
+    
+        .main-container {
+            display: flex;
+            max-width: 1200px;
+            margin: 20px auto;
+            gap: 20px;
+            padding: 0 20px;
+        }
+    
+        .content-area {
+            flex: 1;
+        }
+    
+        .sidebar {
+            width: 300px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+        }
+    
+        .sidebar h3 {
+            color: #666;
+            font-size: 18px;
+            margin-bottom: 15px;
+            border-bottom: 1px dashed #bbbbbb;
+            padding-bottom: 10px;
+        }
+    
+        .popular-item {
+            display: block;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            color: #333;
+        }
+    
+        .popular-item:hover {
+            background-color: #f8f8f8;
+        }
+    
+        .popular-title {
+            font-weight: bold;
+            color: #666;
+            margin-bottom: 5px;
+        }
+    
+        .popular-empathy {
+            font-size: 12px;
+            color: #666;
+        }
+    </style>
 </head>
 
 <body>
-    <div>
-        <a href="/home" id="home-link">AHOO知恵袋</a>
-    </div>
-    <!--質問フォームのボタン-->
-    <a class="ask-button" href="/form">質問する</a>
+    <div class="header-container">
+        <div class="header-left">
+            <img src="/img/logo.png" alt="AHOO知恵袋ロゴ" class="logo-img">
+            <a href="/home" id="home-link">AHOO知恵袋</a>
+        </div>
+        <div class="user-info" sec:authorize="isAuthenticated()">
+            <span>ようこそ、<strong sec:authentication="name"></strong>さん</span>
+            <form th:action="@{/logout}" method="post" style="margin: 0;">
+                <button type="submit" class="logout-btn">ログアウト</button>
+            </form>
+        </div>
+        </div>
+        
+        <div class="main-container">
+            <div class="content-area">
+                <a class="ask-button" href="/form">質問する</a>
 
-    <div class="questions-list-container">
+            <div class="questions-list-container">
         <div th:if="${#lists.isEmpty(titles)}">
             何も質問がないようです
         </div>
         <a th:each="title : ${titles}" class="card" th:href="@{/question/{id}(id=${title.id})}">
             <h2 th:text="${title.title}"></h2>
             <div id="question-status">
-                <div class="empathy-container">                    <span class="empathy-count" th:text="'共感:' + ${title.empathyCount}"></span>
-                    <button class="question-empathy-btn" th:data-id="${title.id}" onclick="incrementEmpathy(event, this)">
-                        共感
-                    </button>
-                </div>
-                <p th:text="${title.createdTime}"></p>
+                <div style="display: flex; justify-content: space-between; width: 100%;">
+                    <div class="empathy-container">
+                        <span class="empathy-count" th:text="'共感:' + ${title.empathyCount}"></span>
+                        <button class="question-empathy-btn" th:data-id="${title.id}" onclick="incrementEmpathy(event, this)">
+                            共感
+                        </button>
+                    </div>
+                    <div style="display: flex; flex-direction: column; align-items: flex-end;">
+                        <span th:if="${title.username}" style="font-size: 0.9em; color: #666;">投稿者: <span
+                                th:text="${title.username}"></span></span>
+                        <p th:text="${title.createdTime}"></p>
+                        </div>
+                        </div>
+                        </div>
+                </a>
             </div>
-        </a>
+            </div>
+            
+            <div class="sidebar">
+                <h3>人気の質問</h3>
+                <div th:if="${!#lists.isEmpty(popularQuestions)}">
+                    <a th:each="popular : ${popularQuestions}" th:href="@{/question/{id}(id=${popular.id})}" class="popular-item">
+                        <div class="popular-title" th:text="${popular.title}"></div>
+                        <div class="popular-empathy"><span th:text="${popular.empathyCount}"></span> 共感</div>
+                    </a>
+                </div>
+                <div th:if="${#lists.isEmpty(popularQuestions)}">
+                    まだ人気の質問がありません
+                </div>
+            </div>
     </div>
 
     <script>
         function incrementEmpathy(event, button) {
-            // リンククリックイベントをキャンセル（質問詳細ページへの遷移を防止）
             event.preventDefault();
             event.stopPropagation();
             
@@ -52,7 +180,6 @@
                     const currentCount = parseInt(currentText.replace('共感:', ''));
                     countElement.text('共感:' + (currentCount + 1));
                     
-                    // ボタンを一時的に無効化（連打防止）
                     btn.prop('disabled', true);
                     setTimeout(function() {
                         btn.prop('disabled', false);

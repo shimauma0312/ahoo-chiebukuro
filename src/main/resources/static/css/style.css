@@ -1,227 +1,142 @@
+/* 基本設定 - Yahoo知恵袋風シンプルデザイン */
 body {
-    font-family: 'Comic Sans MS', 'Roboto', 'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, sans-serif; /* バカっぽいフォント追加 */
-    background-color: #FFF8E1; /* 明るい黄色の背景 */
+    font-family: 'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, sans-serif;
+        background-color: #f5f5f0;
     margin: 0;
     padding: 0;
-    color: #212121;
+    color: #333;
     line-height: 1.6;
-    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23FF9800' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
 }
 
-/* ヘッダー的な役割 */
-div:has(> #home-link) {
-    background-color: #FF9800; /* オレンジ色のヘッダー */
-    background-image: linear-gradient(45deg, #FF9800, #FFC107);
-    padding: 15px 0;
-    text-align: center;
-    width: 100%;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 10px rgba(255, 152, 0, 0.3);
-    border-bottom: 3px dashed #FFC107; /* 点線の境界線 */
-}
-
+/* ヘッダーリンク */
 #home-link {
-    color: #FFFFFF;
+    color: #fff;
     text-decoration: none;
-    font-size: 24px;
-    font-weight: bold;
-    letter-spacing: 1px;
-    text-shadow: 2px 2px 0 #F57C00; /* テキストに影を付ける */
-    transform: rotate(-1deg); /* 少し傾ける */
-    display: inline-block;
+    font-size: 18px;
+        font-weight: normal;
 }
 
 #home-link:hover {
-    transform: rotate(1deg) scale(1.05); /* ホバー時に反対方向に傾ける */
-    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* バウンスするような動き */
+    text-decoration: underline;
 }
 
+/* 見出し */
 h1 {
-    color: #FF5722;
+    color: #333;
     text-align: center;
-    margin-bottom: 24px;
-    font-size: 28px;
-    font-weight: bold;
-    text-shadow: 1px 1px 0 #FFE0B2;
-    transform: rotate(-1deg);
-    display: inline-block;
-    padding: 5px 15px;
-    background-color: #FFF;
-    border-radius: 10px;
-    border: 2px solid #FF9800;
-    box-shadow: 3px 3px 0 #FF9800;
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
-    width: fit-content;
+    margin: 20px 0;
+        font-size: 24px;
+        font-weight: normal;
 }
 
 .heading-style {
-    color: #FF5722;
-    font-size: 22px;
-    margin-top: 32px;
-    margin-bottom: 20px;
-    border-bottom: 3px dashed #FF9800; /* 点線の下線 */
+    color: #333;
+        font-size: 18px;
+        margin: 20px auto;
     padding-bottom: 8px;
-    text-align: left;
-    width: 80%;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-    font-weight: bold;
-    position: relative;
+    border-bottom: 1px solid #ddd;
+        width: 90%;
+        max-width: 800px;
+        font-weight: normal;
 }
 
-.heading-style::after {
-    content: "🙈"; /* 絵文字を追加 */
-    position: absolute;
-    right: 10px;
-    top: 0;
-    font-size: 24px;
-}
-
+/* 質問ボタン */
 .ask-button {
     display: block;
-    background-color: #FF5722;
-    background-image: linear-gradient(45deg, #FF5722, #FF9800);
-    color: #FFFFFF;
-    padding: 15px 30px;
-    margin: 24px auto;
-    border-radius: 50px; /* 丸いボタン */
+    background-color: #000;
+        color: #fff;
+        padding: 12px 24px;
+        margin: 20px auto;
     text-decoration: none;
-    font-weight: bold;
-    font-size: 18px;
+    font-weight: normal;
+        font-size: 15px;
     text-align: center;
     width: fit-content;
-    box-shadow: 0 5px 0 #E64A19; /* 押し込み効果のある影 */
-    transition: all 0.2s;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    position: relative;
-    overflow: hidden;
-}
-
-.ask-button::before {
-    content: "🤔"; /* 考え中の絵文字 */
-    position: absolute;
-    left: 10px;
-    top: 50%;
-    transform: translateY(-50%);
+    border: none;
 }
 
 .ask-button:hover {
-    background-image: linear-gradient(45deg, #FF9800, #FF5722);
-    transform: translateY(3px);
-    box-shadow: 0 2px 0 #E64A19;
+    background-color: #8b8b8b;
 }
 
+/* カード（質問・回答） */
 .card {
-    background-color: #FFFFFF;
-    margin: 20px auto;
-    padding: 25px;
-    border-radius: 10px;
-    box-shadow: 5px 5px 0 #FFD54F; /* オフセットの影 */
-    width: 80%;
-    max-width: 600px;
+    background-color: #fff;
+        margin: 12px auto;
+        padding: 16px;
+        width: 90%;
+        max-width: 800px;
     overflow-wrap: break-word;
-    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-    border: 2px solid #FFB74D;
-    position: relative;
-}
-
-.card::before {
-    content: "💭"; /* 吹き出しの絵文字 */
-    position: absolute;
-    top: -15px;
-    left: 20px;
-    font-size: 24px;
-    transform: rotate(-15deg);
+    border-top: 1px solid #e6e6e6;
 }
 
 .card:hover {
-    transform: translateY(-5px) rotate(1deg);
-    box-shadow: 8px 8px 0 #FFD54F;
+    background-color: #fafafa;
 }
 
 .card h2 {
     margin-top: 0;
-    color: #FF5722;
-    font-size: 20px;
-    margin-bottom: 15px;
-    font-weight: bold;
-    border-bottom: 2px dashed #FFE0B2;
-    padding-bottom: 5px;
+    color: #0066cc;
+        font-size: 16px;
+        margin-bottom: 8px;
+        font-weight: normal;
+    }
+    
+    .card h2:hover {
+        text-decoration: underline;
 }
 
 .card p {
-    color: #5D4037;
-    line-height: 1.8;
-    font-size: 16px;
+    color: #333;
+        line-height: 1.6;
+        font-size: 14px;
 }
 
+/* 質問ステータス */
 #question-status {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 14px;
-    color: #8D6E63;
-    margin-top: 20px;
-    padding-top: 10px;
-    border-top: 2px dashed #FFE0B2;
+    font-size: 13px;
+        color: #666;
+        margin-top: 12px;
+        padding-top: 8px;
+        border-top: 1px solid #f0f0f0;
 }
 
-/* フォーム全体 */
+/* フォーム */
 .flex-form {
     display: flex;
     flex-direction: column;
-    width: 80%;
-    max-width: 600px;
-    margin: 30px auto;
-    background-color: #FFFFFF;
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 5px 5px 0 #FFA726; /* オフセットの影 */
-    border: 2px solid #FFB74D;
-    position: relative;
-}
-
-.flex-form::after {
-    content: "✏️"; /* 鉛筆の絵文字 */
-    position: absolute;
-    top: -15px;
-    right: 20px;
-    font-size: 24px;
-    transform: rotate(15deg);
+    width: 90%;
+        max-width: 800px;
+        margin: 20px auto;
+        background-color: #fff;
+        padding: 20px;
 }
 
 .flex-form p:first-of-type {
-    font-size: 18px;
-    color: #FF5722;
-    margin-bottom: 20px;
-    font-weight: bold;
-    text-align: center;
+    font-size: 16px;
+        color: #333;
+        margin-bottom: 16px;
+        font-weight: normal;
 }
 
 form input[type="text"],
 form textarea {
-    margin-bottom: 20px;
-    padding: 15px;
-    border-radius: 10px;
-    border: 2px dashed #FFB74D;
-    width: calc(100% - 30px);
-    font-size: 16px;
-    background-color: #FFF8E1;
-    transition: all 0.3s;
-    font-family: 'Comic Sans MS', sans-serif;
+    margin-bottom: 16px;
+        padding: 8px;
+        border: 1px solid #ccc;
+        width: 100%;
+        font-size: 14px;
+        background-color: #fff;
 }
 
 form input[type="text"]:focus,
 form textarea:focus {
-    border-color: #FF9800;
+    border-color: #000;
     outline: none;
-    box-shadow: 0 0 0 3px rgba(255, 152, 0, 0.3);
-    background-color: #FFFFFF;
-    transform: scale(1.02);
+    background-color: #fff;
 }
 
 form textarea {
@@ -230,149 +145,110 @@ form textarea {
 }
 
 form input[type="submit"] {
-    background-color: #FF9800;
-    background-image: linear-gradient(45deg, #FF9800, #FFC107);
-    color: white;
-    padding: 15px 30px;
-    border-radius: 50px;
+    background-color: #000;
+        color: #fff;
+        padding: 12px 32px;
     border: none;
     cursor: pointer;
-    font-size: 18px;
-    font-weight: bold;
-    letter-spacing: 1px;
-    transition: all 0.3s;
-    box-shadow: 0 5px 0 #F57C00;
-    margin-top: 10px;
-    position: relative;
-    font-family: 'Comic Sans MS', sans-serif;
+    font-size: 15px;
+        font-weight: normal;
+        margin-top: 8px;
+        width: fit-content;
 }
 
 form input[type="submit"]:hover {
-    background-image: linear-gradient(45deg, #FFC107, #FF9800);
-    transform: translateY(3px);
-    box-shadow: 0 2px 0 #F57C00;
+    background-color: #e67e00;
 }
 
 /* エラーメッセージ */
 p[style="color:red;"] {
-    font-size: 14px;
-    margin-top: -15px;
-    margin-bottom: 15px;
-    color: #F44336 !important;
-    background-color: #FFEBEE;
-    padding: 5px 10px;
-    border-radius: 5px;
-    border-left: 3px solid #F44336;
+    font-size: 13px;
+        margin-top: -12px;
+        margin-bottom: 12px;
+        color: #d32f2f !important;
+        background-color: #fff;
+        padding: 8px;
+        border-left: 3px solid #d32f2f;
 }
 
+/* 回答セクション */
 #answer {
-    border-top: 2px dashed #FFE0B2;
-    padding-top: 20px;
+    border-top: 1px solid #e6e6e6;
+        padding-top: 16px;
+        margin-top: 16px;
 }
 
 #answer h2 {
-    color: #FF9800;
-    font-size: 18px;
-    font-weight: bold;
+    color: #333;
+        font-size: 15px;
+        font-weight: normal;
+        margin-bottom: 8px;
 }
 
 #answer p {
-    font-size: 16px;
+    font-size: 14px;
 }
 
 #answer p:last-of-type {
-    font-size: 14px;
-    color: #8D6E63;
+    font-size: 13px;
+        color: #666;
     text-align: right;
-    font-style: italic;
+    margin-top: 8px;
 }
 
-/* 共感ボタンと共感数のスタイル */
+/* 共感ボタンと数 */
 .empathy-container {
     display: flex;
     align-items: center;
-    margin-top: 15px;
+    margin-top: 12px;
 }
 
 .star-btn {
-    background-color: #FF9800;
-    background-image: linear-gradient(45deg, #FF9800, #FFC107);
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 50px;
+    background-color: #e8e8e8;
+        color: #333;
+        border: 1px solid #ccc;
+        padding: 6px 16px;
     cursor: pointer;
-    font-weight: bold;
-    font-size: 16px;
-    transition: all 0.3s;
-    margin-right: 15px;
-    box-shadow: 0 3px 0 #F57C00;
-    position: relative;
-    font-family: 'Comic Sans MS', sans-serif;
-}
-
-.star-btn::before {
-    content: "👍"; /* サムズアップの絵文字 */
-    margin-right: 5px;
+    font-weight: normal;
+        font-size: 13px;
+        margin-right: 12px;
 }
 
 .star-btn:hover {
-    background-image: linear-gradient(45deg, #FFC107, #FF9800);
-    transform: translateY(2px);
-    box-shadow: 0 1px 0 #F57C00;
+    background-color: #d8d8d8;
 }
 
 .star-btn:disabled {
-    background-color: #BDBDBD;
-    background-image: none;
-    box-shadow: none;
+    background-color: #f5f5f5;
+        color: #999;
     cursor: not-allowed;
 }
 
 .empathy-count {
-    color: #8D6E63;
-    font-size: 16px;
-    font-weight: bold;
-    background-color: #FFF8E1;
-    padding: 5px 10px;
-    border-radius: 20px;
-    border: 2px dashed #FFB74D;
+    color: #666;
+        font-size: 13px;
+        font-weight: normal;
 }
 
-/* ホームページの共感ボタンとカウント */
+/* ホームページの共感ボタン */
 .question-empathy-btn {
-    background-color: #FF9800;
-    background-image: linear-gradient(45deg, #FF9800, #FFC107);
-    color: white;
-    border: none;
-    padding: 5px 15px;
-    border-radius: 50px;
+    background-color: #e8e8e8;
+        color: #333;
+        border: 1px solid #ccc;
+        padding: 4px 12px;
     cursor: pointer;
-    font-weight: bold;
-    font-size: 14px;
-    transition: all 0.3s;
-    margin-left: 15px;
-    box-shadow: 0 2px 0 #F57C00;
-    position: relative;
-    font-family: 'Comic Sans MS', sans-serif;
-}
-
-.question-empathy-btn::before {
-    content: "👍"; /* サムズアップの絵文字 */
-    margin-right: 5px;
+    font-weight: normal;
     font-size: 12px;
+    margin-left: 12px;
 }
 
 .question-empathy-btn:hover {
-    background-image: linear-gradient(45deg, #FFC107, #FF9800);
-    transform: translateY(2px);
-    box-shadow: 0 0px 0 #F57C00;
+    background-color: #d8d8d8;
 }
 
 .question-empathy-btn:disabled {
-    background-color: #BDBDBD;
-    background-image: none;
-    box-shadow: none;
+    background-color: #f5f5f5;
+        color: #999;
     cursor: not-allowed;
 }
 
@@ -381,71 +257,47 @@ p[style="color:red;"] {
     align-items: center;
 }
 
-/* home.html の質問がない場合のメッセージ */
+/* 空メッセージ */
 div[th\:if="${#lists.isEmpty(titles)}"] {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 18px;
-    color: #8D6E63;
-    margin: 50px auto;
-    padding: 40px;
-    background-color: #FFFFFF;
-    border-radius: 15px;
-    box-shadow: 5px 5px 0 #FFD54F;
-    width: 80%;
-    max-width: 600px;
-    min-height: 120px;
-    border: 2px dashed #FFB74D;
+    font-size: 15px;
+        color: #666;
+        margin: 40px auto;
+        padding: 32px;
+        background-color: #fff;
+        width: 90%;
+        max-width: 800px;
     text-align: center;
-    position: relative;
+    border-top: 1px solid #e6e6e6;
 }
 
-div[th\:if="${#lists.isEmpty(titles)}"]::before {
-    content: "🙊"; /* 見ざる絵文字 */
-    display: block;
-    font-size: 40px;
-    margin-bottom: 15px;
-}
-
-/* question.html の回答がない場合のメッセージ */
-div[th\:if="${#lists.isEmpty(answers)}"], .no-answers-message {
+div[th\:if="${#lists.isEmpty(answers)}"],
+.no-answers-message {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-size: 18px;
-    color: #8D6E63;
-    margin: 30px auto;
-    padding: 30px;
-    background-color: #FFFFFF;
-    border-radius: 15px;
-    width: 80%;
-    max-width: 600px;
-    min-height: 100px;
-    box-shadow: 5px 5px 0 #FFD54F;
-    border: 2px dashed #FFB74D;
+    font-size: 15px;
+        color: #666;
+        margin: 24px auto;
+        padding: 24px;
+        background-color: #fff;
+        width: 90%;
+        max-width: 800px;
     text-align: center;
-    position: relative;
-    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-}
-
-div[th\:if="${#lists.isEmpty(answers)}"]::before, .no-answers-message::before {
-    content: "🙈"; /* 見ざる絵文字 */
-    display: block;
-    font-size: 40px;
-    margin-bottom: 15px;
+    border-top: 1px solid #e6e6e6;
 }
 
 .gap {
-    margin-bottom: 25px !important;
+    margin-bottom: 20px !important;
 }
 
-/* home.html の質問カードのコンテナ */
 .questions-list-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
-    padding: 0 20px;
+    padding: 0;
 }
