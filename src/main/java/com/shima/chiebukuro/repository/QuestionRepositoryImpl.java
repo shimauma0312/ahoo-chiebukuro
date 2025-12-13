@@ -18,7 +18,12 @@ public class QuestionRepositoryImpl implements QuestionRepository {
     }
 
     public void insertQuestion(QuestionForm questionForm) {
-        sqLiteDBOperations.insertQuestion(questionForm.getTitle(), questionForm.getQuestion());
+        if (questionForm.getUserId() != null) {
+            sqLiteDBOperations.insertQuestionWithUser(questionForm.getTitle(), questionForm.getQuestion(),
+                    questionForm.getUserId());
+        } else {
+            sqLiteDBOperations.insertQuestion(questionForm.getTitle(), questionForm.getQuestion());
+        }
     }
 
     public Question findByQuestionContent(String id) {
@@ -36,5 +41,10 @@ public class QuestionRepositoryImpl implements QuestionRepository {
     @Override
     public void incrementEmpathyCount(int questionId) {
         sqLiteDBOperations.incrementQuestionEmpathyCount(questionId);
+    }
+
+    @Override
+    public List<Question> findPopularQuestions(int limit) {
+        return sqLiteDBOperations.selectPopularQuestions(limit);
     }
 }
