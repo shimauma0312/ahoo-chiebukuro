@@ -25,7 +25,6 @@
             "extensions": [
                 "vscjava.vscode-java-pack",
                 "vmware.vscode-boot-dev-pack",
-                "redhat.java",
                 "github.copilot-chat",
                 "github.copilot"
             ]
