@@ -10,22 +10,34 @@ import com.shima.chiebukuro.model.Question;
 import com.shima.chiebukuro.model.QuestionForm;
 import com.shima.chiebukuro.repository.QuestionRepository;
 
+/**
+ * 質問サービス実装クラス
+ */
 @Service
 public class QuestionServiceImpl implements QuestionService {
 
     private final QuestionRepository questionRepository;
 
-    // ShainRepositoryのDI
     public QuestionServiceImpl(QuestionRepository questionRepository) {
         this.questionRepository = questionRepository;
-
     }
 
+    /**
+     * 全質問を取得
+     * 
+     * @return 質問リスト
+     */
     @Override
     public List<Question> findByQuestions() {
         return questionRepository.findAll();
     }
 
+    /**
+     * 質問IDで質問を取得
+     * 
+     * @param id 質問ID
+     * @return 質問情報
+     */
     @Override
     public Question findByQuestionContent(String id) {
         if (id == null || id.trim().isEmpty()) {
@@ -40,19 +52,22 @@ public class QuestionServiceImpl implements QuestionService {
         return question;
     }
 
+    /**
+     * 質問を登録
+     * 
+     * @param questionForm 質問フォーム
+     */
     @Override
     public void insertQuestion(QuestionForm questionForm) {
         if (questionForm == null) {
             throw new ValidationException("Question form cannot be null");
         }
-        
-        // Additional business validation beyond form validation
+
         if (questionForm.getTitle() != null) {
             String trimmedTitle = questionForm.getTitle().trim();
             if (trimmedTitle.isEmpty()) {
                 throw new ValidationException("Question title cannot be empty or contain only whitespace");
             }
-            // Check for inappropriate content (basic example)
             if (trimmedTitle.toLowerCase().contains("spam") || trimmedTitle.toLowerCase().contains("test123")) {
                 throw new ValidationException("Question title contains inappropriate content");
             }
@@ -63,7 +78,6 @@ public class QuestionServiceImpl implements QuestionService {
             if (trimmedQuestion.isEmpty()) {
                 throw new ValidationException("Question content cannot be empty or contain only whitespace");
             }
-            // Check for duplicate questions (simplified check)
             if (trimmedQuestion.toLowerCase().contains("duplicate test")) {
                 throw new ValidationException("This question appears to be a duplicate");
             }
@@ -72,18 +86,33 @@ public class QuestionServiceImpl implements QuestionService {
         questionRepository.insertQuestion(questionForm);
     }
     
+    /**
+     * 質問の共感数をインクリメント
+     * 
+     * @param questionId 質問ID
+     */
     @Override
     public void incrementEmpathyCount(int questionId) {
         if (questionId <= 0) {
             throw new ValidationException("Question ID must be a positive integer");
         }
-        
-        // Check if question exists before incrementing
+
         Question question = questionRepository.findByQuestionContent(String.valueOf(questionId));
         if (question == null) {
             throw new QuestionNotFoundException("Cannot increment empathy count: Question with ID " + questionId + " not found");
         }
         
         questionRepository.incrementEmpathyCount(questionId);
+    }
+
+    /**
+     * 共感数が多い順に質問を取得
+     * 
+     * @param limit 取得件数
+     * @return 質問のリスト
+     */
+    @Override
+    public List<Question> findPopularQuestions(int limit) {
+        return questionRepository.findPopularQuestions(limit);
     }
 }
