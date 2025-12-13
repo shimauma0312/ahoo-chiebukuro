@@ -9,6 +9,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.shima.chiebukuro.model.AnswerForm;
@@ -50,12 +51,28 @@ public class AhooController {
      * @param questionForm 質問フォーム
      * @param model        モデル
      * @param userDetails  ログインユーザー情報
+     * @param page         ページ番号（デフォルト: 1）
+     * @param size         ページサイズ（デフォルト: 10）
      * @return テンプレート名
      */
     @RequestMapping("/home")
-    public String index(QuestionForm questionForm, Model model, @AuthenticationPrincipal UserDetails userDetails) {
-        model.addAttribute("titles", questionService.findByQuestions());
+    public String index(QuestionForm questionForm, Model model,
+            @AuthenticationPrincipal UserDetails userDetails,
+            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        // ページネーションで質問を取得
+        model.addAttribute("titles", questionService.findByQuestionsPaginated(page, size));
         model.addAttribute("popularQuestions", questionService.findPopularQuestions(5));
+
+        // ページネーション情報を計算
+        int totalQuestions = questionService.getTotalQuestionsCount();
+        int totalPages = (int) Math.ceil((double) totalQuestions / size);
+
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", totalPages);
+        model.addAttribute("pageSize", size);
+        model.addAttribute("totalQuestions", totalQuestions);
+
         if (userDetails != null) {
             model.addAttribute("username", userDetails.getUsername());
         }

@@ -126,6 +126,44 @@ public class SQLiteDBOperations {
     }
 
     /**
+     * ページネーションで質問を取得
+     * 
+     * @return
+     */
+    public List<Question> selectQuestionsPaginated(int offset, int pageSize) {
+        String sql = "SELECT q.id, q.title, q.content, q.created_at, "
+                + "CASE WHEN EXISTS (SELECT 1 FROM pragma_table_info('questions') WHERE name='empathy_count') "
+                + "THEN q.empathy_count ELSE 0 END AS empathy_count, "
+                + "q.user_id, u.username "
+                + "FROM questions q "
+                + "LEFT JOIN users u ON q.user_id = u.id "
+                + "LIMIT ? OFFSET ?";
+        List<Question> questions = new ArrayList<>();
+
+        try (Connection conn = DriverManager.getConnection(getDbUrl());
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, pageSize);
+            pstmt.setInt(2, offset);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String title = rs.getString("title");
+                String content = rs.getString("content");
+                String createdTime = rs.getString("created_at");
+                int empathyCount = rs.getInt("empathy_count");
+                Long userId = rs.getObject("user_id") != null ? rs.getLong("user_id") : null;
+                String username = rs.getString("username");
+                questions.add(new Question(id, title, content, createdTime, empathyCount, userId, username));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return questions;
+    }
+
+    /**
      * 全質問を取得
      * 
      * @return 質問リスト
@@ -352,5 +390,28 @@ public class SQLiteDBOperations {
         }
 
         return questions;
+    }
+
+    /**
+     * 総質問数を取得
+     * 
+     * @return 総質問数
+     */
+    public int getTotalQuestionsCount() {
+        String sql = "SELECT COUNT(*) as count FROM questions";
+        int count = 0;
+
+        try (Connection conn = DriverManager.getConnection(getDbUrl());
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery(sql)) {
+
+            if (rs.next()) {
+                count = rs.getInt("count");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return count;
     }
 }

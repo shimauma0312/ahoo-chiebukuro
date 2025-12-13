@@ -33,6 +33,22 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     /**
+     * ページネーションで質問を取得
+     * 
+     * @param pageNumber ページ番号
+     * @param pageSize   ページサイズ
+     * 
+     * @return 質問リスト
+     */
+    @Override
+    public List<Question> findByQuestionsPaginated(int pageNumber, int pageSize) {
+        if (pageNumber < 1 || pageSize < 1) {
+            throw new ValidationException("Page number and page size must be positive integers");
+        }
+        int offset = (pageNumber - 1) * pageSize;
+        return questionRepository.findByQuestionsPaginated(offset, pageSize);
+    }
+    /**
      * 質問IDで質問を取得
      * 
      * @param id 質問ID
@@ -114,5 +130,15 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     public List<Question> findPopularQuestions(int limit) {
         return questionRepository.findPopularQuestions(limit);
+    }
+
+    /**
+     * 総質問数を取得
+     * 
+     * @return 総質問数
+     */
+    @Override
+    public int getTotalQuestionsCount() {
+        return questionRepository.getTotalQuestionsCount();
     }
 }

@@ -102,6 +102,36 @@
             font-size: 12px;
             color: #666;
         }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 30px;
+            padding: 20px;
+        }
+        
+        .page-link {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            text-decoration: none;
+            color: #333;
+            background-color: white;
+            transition: background-color 0.2s;
+        }
+        
+        .page-link:hover {
+            background-color: #f0f0f0;
+        }
+        
+        .page-link.active {
+            background-color: #666;
+            color: white;
+            border-color: #666;
+            font-weight: bold;
+        }
     </style>
 </head>
 
@@ -145,6 +175,20 @@
                         </div>
                         </div>
                 </a>
+                <!-- ページネーション -->
+                <div class="pagination" th:if="${totalPages > 1}">
+                    <a th:if="${currentPage > 1}" th:href="@{/home(page=${currentPage - 1}, size=${pageSize})}" class="page-link">«
+                        前へ</a>
+                
+                    <span th:each="i : ${#numbers.sequence(1, totalPages)}">
+                        <a th:if="${i != currentPage}" th:href="@{/home(page=${i}, size=${pageSize})}" th:text="${i}"
+                            class="page-link"></a>
+                        <span th:if="${i == currentPage}" th:text="${i}" class="page-link active"></span>
+                    </span>
+                
+                    <a th:if="${currentPage < totalPages}" th:href="@{/home(page=${currentPage + 1}, size=${pageSize})}"
+                        class="page-link">次へ »</a>
+                </div>
             </div>
             </div>
             

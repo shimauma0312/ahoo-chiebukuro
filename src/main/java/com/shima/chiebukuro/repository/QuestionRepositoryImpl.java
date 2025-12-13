@@ -17,6 +17,12 @@ public class QuestionRepositoryImpl implements QuestionRepository {
         this.sqLiteDBOperations = sqLiteDBOperations;
     }
 
+    public List<Question> findByQuestionsPaginated(int offset, int pageSize) {
+        List<Question> questions = new ArrayList<>();
+        questions = sqLiteDBOperations.selectQuestionsPaginated(offset, pageSize);
+        return questions;
+    }
+
     public void insertQuestion(QuestionForm questionForm) {
         if (questionForm.getUserId() != null) {
             sqLiteDBOperations.insertQuestionWithUser(questionForm.getTitle(), questionForm.getQuestion(),
@@ -46,5 +52,10 @@ public class QuestionRepositoryImpl implements QuestionRepository {
     @Override
     public List<Question> findPopularQuestions(int limit) {
         return sqLiteDBOperations.selectPopularQuestions(limit);
+    }
+
+    @Override
+    public int getTotalQuestionsCount() {
+        return sqLiteDBOperations.getTotalQuestionsCount();
     }
 }

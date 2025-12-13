@@ -18,6 +18,16 @@ public interface QuestionService {
     List<Question> findByQuestions();
 
     /**
+     * ページネーションで質問を取得
+     * 
+     * @param pageNumber ページ番号
+     * @param pageSize   ページサイズ
+     * 
+     * @return
+     */
+    List<Question> findByQuestionsPaginated(int pageNumber, int pageSize);
+
+    /**
      * 指定されたIDの質問を取得
      * 
      * @param id 質問ID
@@ -46,5 +56,12 @@ public interface QuestionService {
      * @return 質問のリスト
      */
     List<Question> findPopularQuestions(int limit);
+
+    /**
+     * 総質問数を取得
+     * 
+     * @return 総質問数
+     */
+    int getTotalQuestionsCount();
 
 }
